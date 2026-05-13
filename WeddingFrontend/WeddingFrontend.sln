@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37301.10 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeddingFrontend", "WeddingFrontend\WeddingFrontend.csproj", "{32B32EB8-3C6A-4B7C-B50E-97CACE8F7EC3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeddingFrontend.Client", "WeddingFrontend.Client\WeddingFrontend.Client.csproj", "{BD2B52FC-E16E-46D9-BD02-76E0AF314B40}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{32B32EB8-3C6A-4B7C-B50E-97CACE8F7EC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32B32EB8-3C6A-4B7C-B50E-97CACE8F7EC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32B32EB8-3C6A-4B7C-B50E-97CACE8F7EC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32B32EB8-3C6A-4B7C-B50E-97CACE8F7EC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD2B52FC-E16E-46D9-BD02-76E0AF314B40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD2B52FC-E16E-46D9-BD02-76E0AF314B40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD2B52FC-E16E-46D9-BD02-76E0AF314B40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD2B52FC-E16E-46D9-BD02-76E0AF314B40}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EFC384EC-B48F-46CD-B1CA-7B02ED5D641A}
+	EndGlobalSection
+EndGlobal
