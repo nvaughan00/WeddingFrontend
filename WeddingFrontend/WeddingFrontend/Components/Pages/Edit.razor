@@ -52,8 +52,7 @@ else
         if (guest == null) return;
         try
         {
-            await db.SaveChangesAsync(); // entity is already tracked by this db instance
-            // optionally: show a success message here
+            await db.SaveChangesAsync();
         }
         catch (Exception ex)
         {
