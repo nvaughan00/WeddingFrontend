@@ -1,4 +1,6 @@
+using Microsoft.EntityFrameworkCore;
 using WeddingFrontend.Components;
+using WeddingFrontend.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,7 +9,19 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
 
+var dbPath = Path.Combine(Environment.GetFolderPath(
+    Environment.SpecialFolder.LocalApplicationData), "wedding.db");
+
+builder.Services.AddDbContextFactory<AppDbContext>(options =>
+    options.UseSqlite($"Data Source={dbPath}"));
+
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    db.Database.Migrate();
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

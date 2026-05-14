@@ -1,0 +1,68 @@
+﻿@page "/edit/{Id:int}"
+@rendermode InteractiveServer
+@using WeddingFrontend.Context
+@using WeddingFrontend.Models
+@using Microsoft.EntityFrameworkCore
+
+@inject IDbContextFactory<AppDbContext> DbFactory
+@implements IAsyncDisposable
+
+<h3>Edit Guest</h3>
+
+@if (guest == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <div>
+        <label>Name</label>
+        <input @bind="guest.Name" />
+
+        <label>Attending</label>
+        <input type="checkbox" @bind="guest.IsAttending" />
+
+        <label>Plus Ones</label>
+        <input type="number" @bind="guest.PlusOnes" />
+
+        @if (!string.IsNullOrEmpty(errorMessage))
+        {
+            <p style="color:red">@errorMessage</p>
+        }
+
+        <button @onclick="Save">Save</button>
+    </div>
+}
+
+@code {
+    [Parameter] public int Id { get; set; }
+    private Guest? guest;
+    private string? errorMessage;
+    private AppDbContext db = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        db = DbFactory.CreateDbContext();
+        guest = await db.Guests.FindAsync(Id);
+        if (guest == null) errorMessage = "Guest not found.";
+    }
+
+    private async Task Save()
+    {
+        if (guest == null) return;
+        try
+        {
+            await db.SaveChangesAsync(); // entity is already tracked by this db instance
+            // optionally: show a success message here
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error saving guest: {ex.Message}";
+        }
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        await db.DisposeAsync();
+    }
+}
