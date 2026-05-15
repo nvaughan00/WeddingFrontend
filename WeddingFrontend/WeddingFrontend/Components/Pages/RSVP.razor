@@ -1,9 +1,9 @@
 ﻿@page "/rsvp"
+@rendermode @(new InteractiveServerRenderMode(prerender: false))
+@inject IDbContextFactory<AppDbContext> DbFactory
+
 @using WeddingFrontend.Context
 @using WeddingFrontend.Models
-
-@inject IDbContextFactory<AppDbContext> DbFactory
-@rendermode InteractiveServer
 
 <div class="row">
     <div class="col-4">
