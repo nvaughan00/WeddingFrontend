@@ -5,22 +5,7 @@
 @inject IDbContextFactory<AppDbContext> DbFactory
 @rendermode InteractiveServer
 
-<h3>Guest List</h3>
 
-@if (guests == null)
-{
-    <p>Loading...</p>
-}
-
-else
-{
-    <ul>
-        @foreach (var guest in guests)
-        {
-            <li>@guest.Name — @(guest.IsAttending ? "Attending" : "Not Attending")</li>
-        }
-    </ul>
-}
 
 @code {
     private List<Guest>? guests;

@@ -27,3 +27,10 @@ h1:focus {
 .darker-border-checkbox.form-check-input {
     border-color: #929292;
 }
+
+.nav-links a,
+.nav-links a:visited,
+.nav-links a:link {
+    color: #7a5c3a !important;
+    text-decoration: none !important;
+}

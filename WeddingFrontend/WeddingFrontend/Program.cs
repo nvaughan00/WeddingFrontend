@@ -9,7 +9,9 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
 
-var dbPath = "/mounts/wedding-data/wedding.db";
+var dbPath = builder.Environment.IsDevelopment()
+    ? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "wedding.db")
+    : "/mounts/wedding-data/wedding.db";
 
 builder.Services.AddDbContextFactory<AppDbContext>(options =>
     options.UseSqlite($"Data Source={dbPath}"));

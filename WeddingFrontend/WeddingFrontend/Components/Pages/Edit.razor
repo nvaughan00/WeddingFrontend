@@ -22,8 +22,6 @@ else
         <label>Attending</label>
         <input type="checkbox" @bind="guest.IsAttending" />
 
-        <label>Plus Ones</label>
-        <input type="number" @bind="guest.PlusOnes" />
 
         @if (!string.IsNullOrEmpty(errorMessage))
         {

@@ -10,14 +10,14 @@ using WeddingFrontend.Context;
 namespace WeddingFrontend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260514024122_SeedGuestData")]
-    partial class SeedGuestData
+    [Migration("20260515021816_AddHousehold")]
+    partial class AddHousehold
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "10.0.8");
+            modelBuilder.HasAnnotation("ProductVersion", "9.0.0");
 
             modelBuilder.Entity("WeddingFrontend.Models.Guest", b =>
                 {
@@ -25,15 +25,20 @@ namespace WeddingFrontend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Entree")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("HouseholdName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<bool>("IsAttending")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
-
-                    b.Property<int>("PlusOnes")
-                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 

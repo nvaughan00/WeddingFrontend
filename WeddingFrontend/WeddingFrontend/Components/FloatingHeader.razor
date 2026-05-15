@@ -1,0 +1,35 @@
+@using Microsoft.AspNetCore.Components.Routing
+@inject NavigationManager Navigation
+
+<div class="floating-header-wrap">
+    <nav class="floating-header @(isScrolled ? "scrolled" : "")">
+        <a href="/" class="brand">Nick & Whitney's Cool Ass Wedding</a>
+
+        <button class="hamburger @(menuOpen ? "open" : "")" @onclick="ToggleMenu" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <ul class="nav-links @(menuOpen ? "open" : "")">
+            <li><NavLink href="/" Match="NavLinkMatch.All" @onclick="CloseMenu">Home</NavLink></li>
+            <li><NavLink href="/guests" @onclick="CloseMenu">Wedding Party</NavLink></li>
+            <li><NavLink href="/rsvp" @onclick="CloseMenu">RSVP</NavLink></li>
+            <li><NavLink href="/guests" @onclick="CloseMenu">Registry</NavLink></li>
+            <li><NavLink href="/details" @onclick="CloseMenu">FAQ</NavLink></li>
+        </ul>
+    </nav>
+</div>
+
+@if (menuOpen)
+{
+    <div class="overlay" @onclick="CloseMenu"></div>
+}
+
+@code {
+    private bool menuOpen = false;
+    private bool isScrolled = false;
+
+    private void ToggleMenu() => menuOpen = !menuOpen;
+    private void CloseMenu() => menuOpen = false;
+}
