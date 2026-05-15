@@ -4,5 +4,6 @@
     {
         public int Id { get; set; }
         public List<Guest> Family { get; set; } = new List<Guest>();
+        public string HouseholdName { get; set; }
     }
 }

@@ -17,12 +17,12 @@ namespace WeddingFrontend.Migrations
                 {
                 { "James Smith",   true,  "Chicken", "Smith Family"    },
                 { "Laura Smith",   true,  "Fish",    "Smith Family"    },
-                { "Tom Baker",     true,  "Beef",    "Baker Household" },
-                { "Sarah Baker",   false, "",        "Baker Household" },
+                { "Tom Baker",     true,  "Beef",    "Baker Family" },
+                { "Sarah Baker",   false, "",        "Baker Family" },
                 { "Chris Johnson", true,  "Chicken", "Johnson Family"  },
                 { "Emma Johnson",  true,  "Vegetarian", "Johnson Family" },
-                { "Mike Davis",    true,  "Beef",    "Davis Household" },
-                { "Rachel Davis",  true,  "Fish",    "Davis Household" },
+                { "Mike Davis",    true,  "Beef",    "Davis Family" },
+                { "Rachel Davis",  true,  "Fish",    "Davis Family" },
                 { "Paul Wilson",   false, "",        "Wilson Family"   },
                 { "Anna Wilson",   true,  "Chicken", "Wilson Family"   }
                 }

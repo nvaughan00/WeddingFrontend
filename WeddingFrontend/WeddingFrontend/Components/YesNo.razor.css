@@ -1,0 +1,50 @@
+.yn-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding-top: 40px;
+}
+
+.yn-label {
+    font-family: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
+    font-size: 1.05rem;
+    letter-spacing: 0.08em;
+    color: #a08060;
+}
+
+.yn-toggle {
+    display: flex;
+    border: 1px solid rgba(180, 155, 120, 0.4);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(100, 70, 40, 0.08);
+    background: rgba(255, 252, 248, 0.92);
+}
+
+.yn-btn {
+    padding: 12px 36px;
+    font-family: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
+    font-size: 1.05rem;
+    letter-spacing: 0.1em;
+    color: #a08060;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.yn-btn:first-child {
+    border-right: 1px solid rgba(180, 155, 120, 0.3);
+}
+
+.yn-btn:hover {
+    background: rgba(180, 140, 90, 0.08);
+    color: #7a5c3a;
+}
+
+.yn-btn.selected {
+    background: rgba(180, 140, 90, 0.18);
+    color: #7a5c3a;
+    font-weight: 600;
+}

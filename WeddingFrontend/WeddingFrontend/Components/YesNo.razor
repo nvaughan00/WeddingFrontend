@@ -1,0 +1,23 @@
+<div class="yn-wrap">
+    @if (!string.IsNullOrEmpty(Label))
+    {
+        <label class="yn-label">@Label <i>(@(string.Join(", ", FamilyNames )))</i></label>
+    }
+    <div class="yn-toggle">
+        <button class="yn-btn @(Value == true ? "selected" : "")" @onclick="() => SetValue(true)">Yes</button>
+        <button class="yn-btn @(Value == false ? "selected" : "")" @onclick="() => SetValue(false)">No</button>
+    </div>
+</div>
+
+@code {
+    [Parameter] public bool? Value { get; set; }
+    [Parameter] public EventCallback<bool?> ValueChanged { get; set; }
+    [Parameter] public string Label { get; set; } = string.Empty;
+    [Parameter] public List<string> FamilyNames { get; set; } = new List<string>();
+
+    private async Task SetValue(bool val)
+    {
+        Value = val;
+        await ValueChanged.InvokeAsync(Value);
+    }
+}

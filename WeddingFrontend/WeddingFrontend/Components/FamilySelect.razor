@@ -1,0 +1,27 @@
+<div class="rsvp-container">
+    <h1 class="rsvp-title">RSVP</h1>
+    <p class="rsvp-subtitle">Please select your household to begin.</p>
+
+    <div class="dropdown-wrap">
+        <select class="household-select" @onchange="NameSelected">
+            <option value="" disabled selected hidden>— Select your family —</option>
+            @foreach (var name in HouseholdNames)
+            {
+                <option value="@name">@name</option>
+            }
+        </select>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public List<string> HouseholdNames { get; set; } = new List<string>();
+
+    [Parameter]
+    public EventCallback<string> FamilyNameSelected { get; set; }
+
+    public async Task NameSelected(ChangeEventArgs familyName)
+    {
+        await FamilyNameSelected.InvokeAsync(familyName?.Value?.ToString());
+    }
+}

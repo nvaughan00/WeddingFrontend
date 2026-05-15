@@ -1,0 +1,96 @@
+.rsvp-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: transparent;
+    padding-top: 180px;
+}
+
+.rsvp-title {
+    font-family: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
+    font-size: 3rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: #7a5c3a;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.rsvp-subtitle {
+    font-family: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.08em;
+    color: #a08060;
+    color: #a08060;
+    text-align: center;
+}
+
+.dropdown-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+}
+
+.dropdown-wrap::after {
+    content: '▾';
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #7a5c3a;
+    font-size: 1rem;
+    pointer-events: none;
+}
+
+.household-select {
+    width: 100%;
+    appearance: none;
+    -webkit-appearance: none;
+    padding: 14px 44px 14px 20px;
+    font-family: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
+    font-size: 1.05rem;
+    letter-spacing: 0.08em;
+    color: #7a5c3a;
+    background: rgba(255, 252, 248, 0.92);
+    border: 1px solid rgba(180, 155, 120, 0.4);
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(100, 70, 40, 0.08);
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.household-select:focus {
+    border-color: rgba(180, 140, 90, 0.7);
+    box-shadow: 0 2px 16px rgba(100, 70, 40, 0.14);
+}
+
+.household-select option {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    color: #7a5c3a;
+    background: #fffcf8;
+}
+
+.selected-label {
+    margin-top: 28px;
+    font-family: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
+    font-size: 1.15rem;
+    letter-spacing: 0.08em;
+    color: #a08060;
+    text-align: center;
+}
+
+.selected-name {
+    color: #7a5c3a;
+    font-weight: 600;
+}
+
+@media (max-width: 600px) {
+    .rsvp-title {
+        font-size: 2.2rem;
+    }
+
+    .dropdown-wrap {
+        max-width: calc(100% - 48px);
+    }
+}

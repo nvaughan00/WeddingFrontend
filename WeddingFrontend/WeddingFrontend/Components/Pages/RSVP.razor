@@ -1,0 +1,42 @@
+﻿@page "/rsvp"
+@using WeddingFrontend.Context
+@using WeddingFrontend.Models
+
+@inject IDbContextFactory<AppDbContext> DbFactory
+@rendermode InteractiveServer
+
+<div class="row">
+    <div class="col-4">
+        <FamilySelect HouseholdNames="@HouseholdNames" FamilyNameSelected="GetSelectedHouseholdName"></FamilySelect>
+        @if (SelectedHouseholdName != null)
+        {
+            var householdFamilyNames = guests?.Where(x => x.HouseholdName == SelectedHouseholdName).Select(x => x.Name).ToList() ?? new List<string>();
+            <YesNo Label="Is Everyone In Your Household Attending?" FamilyNames="householdFamilyNames" ValueChanged="GetYesNoValue"></YesNo>
+        }
+    </div>
+</div>
+
+@code {
+    private List<Guest>? guests;
+    private List<Household> Households = new List<Household>();
+    private List<string> HouseholdNames = new List<string>();
+    private string? SelectedHouseholdName;
+    private bool? AllAttending;
+
+    private void GetSelectedHouseholdName(string data) => SelectedHouseholdName = data;
+    private void GetYesNoValue(bool? val) => AllAttending = val;
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var db = DbFactory.CreateDbContext();
+        guests = await db.Guests.ToListAsync();
+
+        HouseholdNames = guests.DistinctBy(x => x.HouseholdName).Select(x => x.HouseholdName).ToList();
+
+        foreach(var name in HouseholdNames)
+        {
+            var familyMembers = guests.Where(x => x.HouseholdName == name);
+        }
+    }
+
+}
