@@ -17,6 +17,10 @@ namespace WeddingFrontend.Migrations
                 {
                 { "James Smith",   true,  "Chicken", "Smith Family"    },
                 { "Laura Smith",   true,  "Fish",    "Smith Family"    },
+                { "Dan Smith",   true,  "Chicken", "Smith Family"    },
+                { "Quivon Smith",   true,  "Fish",    "Smith Family"    },
+                { "Ja'Letrice Smith",   true,  "Chicken", "Smith Family"    },
+                { "Bob Smith",   true,  "Fish",    "Smith Family"    },
                 { "Tom Baker",     true,  "Beef",    "Baker Family" },
                 { "Sarah Baker",   false, "",        "Baker Family" },
                 { "Chris Johnson", true,  "Chicken", "Johnson Family"  },
