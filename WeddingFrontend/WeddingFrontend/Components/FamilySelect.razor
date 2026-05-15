@@ -5,8 +5,8 @@
     <div class="dropdown-wrap">
         @if (HouseholdNames.Any())
         {
-            <div class="custom-select @(isOpen ? "open" : "")" @onclick="ToggleOpen">
-                <div class="custom-select-display">
+            <div class="custom-select @(isOpen ? "open" : "")">
+                <div class="custom-select-display" @onclick="ToggleOpen" @onclick:stopPropagation>
                     <span class="@(selectedName == null ? "placeholder" : "")">
                         @(selectedName ?? "— Select your family —")
                     </span>
