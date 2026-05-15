@@ -1,6 +1,7 @@
 ﻿@page "/rsvp"
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
 @inject IDbContextFactory<AppDbContext> DbFactory
+@inject IJSRuntime JS
 
 @using WeddingFrontend.Context
 @using WeddingFrontend.Models
@@ -16,15 +17,43 @@
     </div>
 </div>
 
+@if (ShowHellYeah)
+{
+    <HellYeah OnContinue="() => ShowHellYeah = false" />
+}
+
+@if(AllAttending != null && AllAttending == false)
+{
+    PlayBoo();
+}
+
 @code {
     private List<Guest>? guests;
     private List<Household> Households = new List<Household>();
     private List<string> HouseholdNames = new List<string>();
     private string? SelectedHouseholdName;
     private bool? AllAttending;
+    private bool ShowHellYeah { get; set; } = false;
 
     private void GetSelectedHouseholdName(string data) => SelectedHouseholdName = data;
-    private void GetYesNoValue(bool? val) => AllAttending = val;
+    private void GetYesNoValue(bool? val) 
+    {
+        AllAttending = val;
+
+        if(val == true)
+        {
+            ShowHellYeah = true;
+        }
+        else
+        {
+            ShowHellYeah = false;
+        }
+    }
+
+    private async Task PlayBoo()
+    {
+        await JS.InvokeVoidAsync("playBoo");
+    }
 
     protected override async Task OnInitializedAsync()
     {

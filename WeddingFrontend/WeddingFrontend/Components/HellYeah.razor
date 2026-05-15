@@ -1,0 +1,26 @@
+@inject IJSRuntime JS
+
+<div id="stage">
+    <canvas id="explosion-canvas"></canvas>
+    <div id="hell-yeah-content">
+        <div id="hell-yeah-title">HELL YEAH!</div>
+        <div id="hell-yeah-sub">YOU'RE COMING TO THE WEDDING</div>
+        <button class="mt-3" id="continue-btn" @onclick="HandleContinue" >Continue To Entree Selection</button>
+    </div>
+</div>
+
+@code {
+    [Parameter] public EventCallback OnContinue { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+            await JS.InvokeVoidAsync("initExplosion");
+    }
+
+    private async Task HandleContinue()
+    {
+        await JS.InvokeVoidAsync("stopExplosion");
+        await OnContinue.InvokeAsync();
+    }
+}
