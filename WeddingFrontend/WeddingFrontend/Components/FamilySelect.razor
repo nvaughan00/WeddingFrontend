@@ -6,7 +6,7 @@
         @if (HouseholdNames.Any())
         {
             <select class="household-select" @onchange="NameSelected">
-                <option value="" disabled selected hidden>— Select your family —</option>
+                <option value="" disabled="@hasSelected">— Select your family —</option>
                 @foreach (var name in HouseholdNames)
                 {
                     <option value="@name">@name</option>
@@ -21,6 +21,9 @@
 </div>
 
 @code {
+    private bool hasSelected = false;
+
+
     [Parameter]
     public List<string> HouseholdNames { get; set; } = new List<string>();
 
@@ -29,6 +32,11 @@
 
     public async Task NameSelected(ChangeEventArgs familyName)
     {
-        await FamilyNameSelected.InvokeAsync(familyName?.Value?.ToString());
+        var val = familyName?.Value?.ToString();
+        if (!string.IsNullOrEmpty(val))
+        {
+            hasSelected = true;
+            await FamilyNameSelected.InvokeAsync(val);
+        }
     }
 }
