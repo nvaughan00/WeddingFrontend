@@ -3,13 +3,20 @@
     <p class="rsvp-subtitle">Please select your household to begin.</p>
 
     <div class="dropdown-wrap">
-        <select class="household-select" @onchange="NameSelected">
-            <option value="" disabled selected hidden>— Select your family —</option>
-            @foreach (var name in HouseholdNames)
-            {
-                <option value="@name">@name</option>
-            }
-        </select>
+        @if (HouseholdNames.Any())
+        {
+            <select class="household-select" @onchange="NameSelected">
+                <option value="" disabled selected hidden>— Select your family —</option>
+                @foreach (var name in HouseholdNames)
+                {
+                    <option value="@name">@name</option>
+                }
+            </select>
+        }
+        else
+        {
+            <p class="rsvp-subtitle">Loading...</p>
+        }
     </div>
 </div>
 
