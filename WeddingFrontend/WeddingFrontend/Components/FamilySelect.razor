@@ -5,13 +5,26 @@
     <div class="dropdown-wrap">
         @if (HouseholdNames.Any())
         {
-            <select class="household-select" @onchange="NameSelected">
-                <option value="" disabled="@hasSelected">— Select your family —</option>
-                @foreach (var name in HouseholdNames)
+            <div class="custom-select @(isOpen ? "open" : "")" @onclick="ToggleOpen">
+                <div class="custom-select-display">
+                    <span class="@(selectedName == null ? "placeholder" : "")">
+                        @(selectedName ?? "— Select your family —")
+                    </span>
+                </div>
+                @if (isOpen)
                 {
-                    <option value="@name">@name</option>
+                    <ul class="custom-options">
+                        @foreach (var name in HouseholdNames)
+                        {
+                            <li class="custom-option @(name == selectedName ? "selected" : "")"
+                                @onclick:stopPropagation
+                                @onclick="() => SelectName(name)">
+                                @name
+                            </li>
+                        }
+                    </ul>
                 }
-            </select>
+            </div>
         }
         else
         {
@@ -21,22 +34,18 @@
 </div>
 
 @code {
-    private bool hasSelected = false;
+    [Parameter] public List<string> HouseholdNames { get; set; } = new();
+    [Parameter] public EventCallback<string> FamilyNameSelected { get; set; }
 
+    private string? selectedName = null;
+    private bool isOpen = false;
 
-    [Parameter]
-    public List<string> HouseholdNames { get; set; } = new List<string>();
+    private void ToggleOpen() => isOpen = !isOpen;
 
-    [Parameter]
-    public EventCallback<string> FamilyNameSelected { get; set; }
-
-    public async Task NameSelected(ChangeEventArgs familyName)
+    private async Task SelectName(string name)
     {
-        var val = familyName?.Value?.ToString();
-        if (!string.IsNullOrEmpty(val))
-        {
-            hasSelected = true;
-            await FamilyNameSelected.InvokeAsync(val);
-        }
+        selectedName = name;
+        isOpen = false;
+        await FamilyNameSelected.InvokeAsync(name);
     }
 }
