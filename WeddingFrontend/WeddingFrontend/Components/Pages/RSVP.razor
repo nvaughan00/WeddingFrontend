@@ -2,38 +2,67 @@
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
 @inject IDbContextFactory<AppDbContext> DbFactory
 @inject IJSRuntime JS
+@inject NavigationManager Nav
 
 @using WeddingFrontend.Context
 @using WeddingFrontend.Models
+@using WeddingFrontend.Components.RSVPComponents
 
 <div class="row">
-    <div class="col-4">
-        <FamilySelect HouseholdNames="@HouseholdNames" FamilyNameSelected="GetSelectedHouseholdName"></FamilySelect>
+    <div class="col-6">
+        <FamilySelect HouseholdNames="@HouseholdNames" FamilyNameSelected="GetSelectedHouseholdName" Enabled="@(!HasSubmitted)"></FamilySelect>
         @if (SelectedHouseholdName != null)
         {
-            var householdFamilyNames = guests?.Where(x => x.HouseholdName == SelectedHouseholdName).Select(x => x.Name).ToList() ?? new List<string>();
-            <YesNo Label="Is Everyone In Your Household Attending?" FamilyNames="householdFamilyNames" ValueChanged="GetYesNoValue"></YesNo>
+            var householdFamilyNames = guests.Where(x => x.HouseholdName == SelectedHouseholdName).Select(x => x.Name).ToList() ?? new List<string>();
+            <YesNo Label="Is Everyone In Your Household Attending?" FamilyNames="householdFamilyNames" ValueChanged="GetYesNoValue" Enabled="@(!HasSubmitted)"></YesNo>
+        }
+        @if (AllAttending != null && AllAttending == false)
+        {
+
+            var familyMembers = guests.Where(x => x.HouseholdName == SelectedHouseholdName).ToList();
+            <FamilyMembersNotComing FamilyMembers="@familyMembers" OnSelectionChanged="GetAttendingFromFamily"></FamilyMembersNotComing>
+        }
+        @if(HasSubmitted)
+        {
+            if(NoOneComing)
+            {
+                <p class="rsvp-confirmation mt-3">You Hate Us :(</p>
+            }
+            else
+            {
+                var attendees = string.Join(", ", AttendingFromFamily.Select(x => x.Name).ToList());
+                <p class="rsvp-confirmation mt-3">@(AttendingFromFamily.Count == 1 ? $"{attendees} Is Coming!" : $"{attendees} Are Coming!")</p>
+                <div class="submit-wrap">
+                    <button class="submit-btn" @onclick="Submit">Continue To Entree Selection</button>
+                </div>
+            }
         }
     </div>
 </div>
 
 @if (ShowHellYeah)
 {
-    <HellYeah OnContinue="() => ShowHellYeah = false" />
-}
-
-@if(AllAttending != null && AllAttending == false)
-{
-    PlayBoo();
+    var names = guests.Where(x => x.HouseholdName == SelectedHouseholdName).Select(x => x.Name).ToList();
+    <HellYeah OnContinue="() => ShowHellYeah = false" Names="@names" HouseholdName="@SelectedHouseholdName"/>
 }
 
 @code {
-    private List<Guest>? guests;
+    private List<Guest> guests { get; set; } = new List<Guest>();
     private List<Household> Households = new List<Household>();
     private List<string> HouseholdNames = new List<string>();
     private string? SelectedHouseholdName;
     private bool? AllAttending;
     private bool ShowHellYeah { get; set; } = false;
+
+    private List<Guest> AttendingFromFamily { get; set; } = new List<Guest>();
+    private bool HasSubmitted { get; set; } = false;
+    private bool NoOneComing { get; set; } = false;
+
+    private async Task Submit()
+    {
+        var queryNames = string.Join("&", AttendingFromFamily.Select(x => $"Names={Uri.EscapeDataString(x.Name)}"));
+        Nav.NavigateTo($"/rsvp/entree-selection?{queryNames}&HouseholdName={SelectedHouseholdName}");
+    }
 
     private void GetSelectedHouseholdName(string data) => SelectedHouseholdName = data;
     private void GetYesNoValue(bool? val) 
@@ -50,9 +79,17 @@
         }
     }
 
-    private async Task PlayBoo()
+    private Task GetAttendingFromFamily(List<Guest> notAttending)
     {
-        await JS.InvokeVoidAsync("playBoo");
+        var wholeFamily = guests.Where(x => x.HouseholdName == SelectedHouseholdName).ToList();
+        if(notAttending.Count == wholeFamily.Count)
+        {
+            NoOneComing = true;
+        }
+
+        AttendingFromFamily = wholeFamily.Except(notAttending).ToList();
+        HasSubmitted = true;
+        return Task.CompletedTask;
     }
 
     protected override async Task OnInitializedAsync()

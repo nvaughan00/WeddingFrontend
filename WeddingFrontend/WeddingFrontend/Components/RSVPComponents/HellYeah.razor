@@ -1,16 +1,19 @@
 @inject IJSRuntime JS
+@inject NavigationManager Nav
 
 <div id="stage">
     <canvas id="explosion-canvas"></canvas>
     <div id="hell-yeah-content">
         <div id="hell-yeah-title">HELL YEAH!</div>
         <div id="hell-yeah-sub">YOU'RE COMING TO THE WEDDING</div>
-        <button class="mt-3" id="continue-btn" @onclick="HandleContinue" >Continue To Entree Selection</button>
+        <button class="mt-3" id="continue-btn" @onclick="HandleContinue">Continue To Entree Selection</button>
     </div>
 </div>
 
 @code {
     [Parameter] public EventCallback OnContinue { get; set; }
+    [Parameter] public List<string> Names { get; set; }
+    [Parameter] public string HouseholdName { get; set; }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -22,5 +25,8 @@
     {
         await JS.InvokeVoidAsync("stopExplosion");
         await OnContinue.InvokeAsync();
+
+        var queryNames = string.Join("&", Names.Select(x => $"Names={Uri.EscapeDataString(x)}"));
+        Nav.NavigateTo($"/rsvp/entree-selection?{queryNames}&HouseholdName={HouseholdName}");
     }
 }

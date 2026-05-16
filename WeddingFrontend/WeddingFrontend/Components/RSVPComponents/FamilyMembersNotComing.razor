@@ -1,0 +1,43 @@
+﻿@using WeddingFrontend.Models
+
+<div class="member-box">
+    <p class="member-hint">@(HasSubmitted ? "RSVP Submitted!" : "Click On Anyone Not Coming")</p>
+    <div class="member-grid">
+        @foreach (var member in FamilyMembers)
+        {
+            <button class="member-btn @(NotAttending.Contains(member) ? "not-attending" : "") @(HasSubmitted ? "disabled" : "")"
+                    @onclick="() => Toggle(member)"
+                    disabled="@HasSubmitted">
+                @member.Name
+            </button>
+        }
+    </div>
+    @if (!HasSubmitted)
+    {
+        <div class="submit-wrap">
+            <button class="submit-btn" @onclick="Submit">Confirm RSVP</button>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter] public List<Guest> FamilyMembers { get; set; } = new();
+    [Parameter] public EventCallback<List<Guest>> OnSelectionChanged { get; set; }
+
+    private HashSet<Guest> NotAttending = new();
+    private bool HasSubmitted { get; set; } = false;
+
+    private async Task Toggle(Guest member)
+    {
+        if (NotAttending.Contains(member))
+            NotAttending.Remove(member);
+        else
+            NotAttending.Add(member);
+    }
+
+    private async Task Submit()
+    {
+        HasSubmitted = true;
+        await OnSelectionChanged.InvokeAsync(NotAttending.ToList());
+    }
+}

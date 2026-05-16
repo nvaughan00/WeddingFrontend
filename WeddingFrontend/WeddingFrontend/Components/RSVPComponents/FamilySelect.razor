@@ -36,11 +36,16 @@
 @code {
     [Parameter] public List<string> HouseholdNames { get; set; } = new();
     [Parameter] public EventCallback<string> FamilyNameSelected { get; set; }
+    [Parameter] public bool Enabled { get; set; }
 
     private string? selectedName = null;
     private bool isOpen = false;
 
-    private void ToggleOpen() => isOpen = !isOpen;
+    private void ToggleOpen() 
+    {
+        if (!Enabled) return;
+        isOpen = !isOpen;
+    }
 
     private async Task SelectName(string name)
     {

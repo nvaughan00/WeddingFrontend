@@ -1,0 +1,43 @@
+﻿@page "/rsvp/entree-selection"
+@rendermode @(new InteractiveServerRenderMode(prerender: false))
+@inject IDbContextFactory<AppDbContext> DbFactory
+@inject IJSRuntime JS
+
+@using WeddingFrontend.Context
+@using WeddingFrontend.Models
+
+<div class="row">
+    <div class="col-6">
+        <div class="rsvp-container">
+            @foreach(var name in Names)
+            {
+                <p class="rsvp-confirmation">@name</p>
+            }
+            <p class="rsvp-confirmation">@HouseholdName</p>
+        </div>
+    </div>
+</div>
+
+@code {
+    [SupplyParameterFromQuery]
+    public string[]? Names { get; set; }
+
+    [SupplyParameterFromQuery]
+    public string? HouseholdName { get; set; }
+
+    private List<Guest> guests { get; set; } = new List<Guest>();
+    private List<string> HouseholdNames { get; set; } = new List<string>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var db = DbFactory.CreateDbContext();
+        guests = await db.Guests.ToListAsync();
+
+        HouseholdNames = guests.DistinctBy(x => x.HouseholdName).Select(x => x.HouseholdName).ToList();
+
+        foreach(var name in HouseholdNames)
+        {
+            var familyMembers = guests.Where(x => x.HouseholdName == name);
+        }
+    }
+}
