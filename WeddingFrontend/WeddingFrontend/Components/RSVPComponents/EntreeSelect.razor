@@ -16,12 +16,17 @@
         }
     </div>
 
-    <div class="saved-indicator @(showSaved ? "visible" : "")">
-        <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="20 6 9 17 4 12" />
-        </svg>
-        Saved
-    </div>
+    @if (!string.IsNullOrEmpty(SelectedEntree) && Enabled)
+    {
+        <div class="submit-wrap">
+            <button class="submit-btn" @onclick="Submit">Confirm @Guest.Name's Entree</button>
+        </div>
+    }
+
+    @if (showSaved)
+    {
+        <p class="entree-saved-label">✓ Saved</p>
+    }
 </div>
 
 @code {
@@ -32,9 +37,7 @@
     private string SelectedEntree { get; set; } = string.Empty;
     private string? justSelectedEntree = null;
     private List<string> entrees = new() { "Steak", "Salmon", "Pasta" };
-
     private bool showSaved = false;
-    private CancellationTokenSource? _saveCts;
 
     protected override void OnParametersSet()
     {
@@ -42,31 +45,22 @@
             SelectedEntree = Guest.Entree;
     }
 
-    private async Task SelectEntree(string entree)
+    private void SelectEntree(string entree)
     {
         if (!Enabled) return;
-
         SelectedEntree = entree;
         justSelectedEntree = entree;
+    }
 
-        _saveCts?.Cancel();
-        _saveCts = new CancellationTokenSource();
-        var token = _saveCts.Token;
-
+    private async Task Submit()
+    {
+        if (string.IsNullOrEmpty(SelectedEntree)) return;
         showSaved = true;
-        StateHasChanged();
+        justSelectedEntree = null;
+        await OnEntreeSelected.InvokeAsync((Guest, SelectedEntree));
 
-        try
-        {
-            await Task.Delay(2000, token);
-            await InvokeAsync(() =>
-            {
-                showSaved = false;
-                justSelectedEntree = null;
-                StateHasChanged();
-            });
-            await OnEntreeSelected.InvokeAsync((Guest, SelectedEntree));
-        }
-        catch (TaskCanceledException) { }
+        await Task.Delay(2000);
+        showSaved = false;
+        StateHasChanged();
     }
 }

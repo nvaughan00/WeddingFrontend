@@ -48,3 +48,13 @@
     color: #7a5c3a;
     font-weight: 600;
 }
+
+@media (max-width: 600px) {
+    .yn-wrap {
+        width: calc(100% - 32px);
+        max-width: 85%;
+        margin-left: 0px;
+        margin-right: 0px;
+        padding: 24px;
+    }
+}
