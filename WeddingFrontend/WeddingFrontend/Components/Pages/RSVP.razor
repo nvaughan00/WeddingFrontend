@@ -9,7 +9,7 @@
 @using WeddingFrontend.Components.RSVPComponents
 
 <div class="row">
-    <div class="col-6">
+    <div class="col-12 col-md-6">
         <FamilySelect HouseholdNames="@HouseholdNames" FamilyNameSelected="GetSelectedHouseholdName" Enabled="@(!HasSubmitted)"></FamilySelect>
         @if (SelectedHouseholdName != null)
         {
