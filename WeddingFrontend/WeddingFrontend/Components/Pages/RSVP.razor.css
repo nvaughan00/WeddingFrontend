@@ -27,3 +27,14 @@
     transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
     box-shadow: 0 2px 12px rgba(100, 70, 40, 0.2);
 }
+
+@media (max-width: 768px) {
+    .row {
+        margin: 0;
+    }
+
+    .col-12 {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
