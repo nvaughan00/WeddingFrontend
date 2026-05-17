@@ -1,0 +1,174 @@
+﻿.entree-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    background: rgba(255, 252, 248, 0.92);
+    border: 1px solid rgba(180, 155, 120, 0.35);
+    border-radius: 16px;
+    padding: 24px 20px;
+    box-shadow: 0 2px 16px rgba(100, 70, 40, 0.08);
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.entree-guest-name {
+    font-family: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: #7a5c3a;
+    text-align: center;
+    margin: 0;
+}
+
+.entree-options {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    justify-content: center;
+    width: 100%;
+}
+
+.entree-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    width: 160px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    padding: 10px;
+    border: 2px solid transparent;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+}
+
+    .entree-option:hover {
+        border-color: rgba(180, 155, 120, 0.4);
+        transform: translateY(-2px);
+    }
+
+    .entree-option.selected {
+        border-color: #7a5c3a;
+        box-shadow: 0 4px 16px rgba(100, 70, 40, 0.15);
+    }
+
+.entree-image-wrap {
+    width: 140px;
+    height: 140px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(180, 155, 120, 0.2);
+    background: rgba(240, 235, 225, 0.5);
+    flex-shrink: 0;
+}
+
+.entree-image {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.entree-option:hover .entree-image {
+    transform: scale(1.04);
+}
+
+.entree-label {
+    font-family: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    color: #7a5c3a;
+    text-align: center;
+    margin: 0;
+    font-weight: 600;
+}
+
+.entree-option.selected .entree-label {
+    color: #5a3c1a;
+}
+
+@media (max-width: 600px) {
+    .entree-option {
+        width: 100px;
+    }
+
+    .entree-image-wrap {
+        width: 90px;
+        height: 90px;
+    }
+
+    .entree-image {
+        width: 90px;
+        height: 90px;
+    }
+
+    .entree-label {
+        font-size: 0.85rem;
+    }
+}
+
+.saved-indicator {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
+    font-size: 0.95rem;
+    letter-spacing: 0.1em;
+    color: #7a5c3a;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    height: 24px;
+}
+
+    .saved-indicator.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+.check-icon {
+    width: 16px;
+    height: 16px;
+    color: #7a5c3a;
+    stroke-dasharray: 30;
+    stroke-dashoffset: 30;
+}
+
+.saved-indicator.visible .check-icon {
+    animation: drawCheck 0.4s ease forwards;
+}
+
+@keyframes drawCheck {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+.entree-option.just-selected {
+    background: rgba(180, 140, 90, 0.12);
+    border-color: #7a5c3a;
+    box-shadow: 0 4px 20px rgba(100, 70, 40, 0.2);
+    transform: translateY(-2px);
+}
+
+.entree-option.just-selected .entree-label {
+    color: #5a3c1a;
+    font-weight: 700;
+}
+
+.entree-option.just-selected .entree-image-wrap {
+    border-color: rgba(122, 92, 58, 0.5);
+}
+
+.entree-disabled {
+    opacity: 0.55;
+    pointer-events: none;
+}
+
+.entree-option-disabled {
+    cursor: default;
+}

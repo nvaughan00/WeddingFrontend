@@ -1,0 +1,72 @@
+﻿@using WeddingFrontend.Models
+
+<div class="entree-card @(!Enabled ? "entree-disabled" : "")">
+    <p class="entree-guest-name">- Select An Entree For -</p>
+    <p class="entree-guest-name">@Guest.Name</p>
+    <div class="entree-options">
+        @foreach (var option in entrees)
+        {
+            <div class="entree-option @(SelectedEntree == option ? "selected" : "") @(justSelectedEntree == option ? "entree-just-selected-active" : "") @(!Enabled ? "entree-option-disabled" : "")"
+                 @onclick="() => { if (Enabled) SelectEntree(option); }">
+                <div class="entree-image-wrap">
+                    <img class="entree-image" src="images/@(option.ToLower()).jpg" alt="@option" />
+                </div>
+                <p class="entree-label">@option</p>
+            </div>
+        }
+    </div>
+
+    <div class="saved-indicator @(showSaved ? "visible" : "")">
+        <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12" />
+        </svg>
+        Saved
+    </div>
+</div>
+
+@code {
+    [Parameter] public Guest Guest { get; set; } = new();
+    [Parameter] public EventCallback<(Guest, string)> OnEntreeSelected { get; set; }
+    [Parameter] public bool Enabled { get; set; }
+
+    private string SelectedEntree { get; set; } = string.Empty;
+    private string? justSelectedEntree = null;
+    private List<string> entrees = new() { "Steak", "Salmon", "Pasta" };
+
+    private bool showSaved = false;
+    private CancellationTokenSource? _saveCts;
+
+    protected override void OnParametersSet()
+    {
+        if (!string.IsNullOrEmpty(Guest.Entree))
+            SelectedEntree = Guest.Entree;
+    }
+
+    private async Task SelectEntree(string entree)
+    {
+        if (!Enabled) return;
+
+        SelectedEntree = entree;
+        justSelectedEntree = entree;
+
+        _saveCts?.Cancel();
+        _saveCts = new CancellationTokenSource();
+        var token = _saveCts.Token;
+
+        showSaved = true;
+        StateHasChanged();
+
+        try
+        {
+            await Task.Delay(2000, token);
+            await InvokeAsync(() =>
+            {
+                showSaved = false;
+                justSelectedEntree = null;
+                StateHasChanged();
+            });
+            await OnEntreeSelected.InvokeAsync((Guest, SelectedEntree));
+        }
+        catch (TaskCanceledException) { }
+    }
+}

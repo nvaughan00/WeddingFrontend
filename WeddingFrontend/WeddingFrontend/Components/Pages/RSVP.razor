@@ -60,6 +60,25 @@
 
     private async Task Submit()
     {
+        var wholeFamily = guests.Where(x => x.HouseholdName == SelectedHouseholdName).ToList();
+        var db = DbFactory.CreateDbContext();
+
+        foreach(var member in wholeFamily)
+        {
+            if (AttendingFromFamily.Contains(member))
+            {
+                member.IsAttending = true;
+            }
+            else
+            {
+                member.IsAttending = false;
+            }
+        }
+
+        db.Guests.UpdateRange(wholeFamily);
+        db.SaveChanges();
+        db.Dispose();
+
         var queryNames = string.Join("&", AttendingFromFamily.Select(x => $"Names={Uri.EscapeDataString(x.Name)}"));
         Nav.NavigateTo($"/rsvp/entree-selection?{queryNames}&HouseholdName={SelectedHouseholdName}");
     }
@@ -72,6 +91,12 @@
         if(val == true)
         {
             ShowHellYeah = true;
+            var db = DbFactory.CreateDbContext();
+            var updatedGuests = guests.Where(x => x.HouseholdName == SelectedHouseholdName).ToList();
+            updatedGuests.ForEach(x => x.IsAttending = true);
+            db.Guests.UpdateRange(updatedGuests);
+            db.SaveChanges();
+            db.Dispose();
         }
         else
         {
@@ -84,6 +109,12 @@
         var wholeFamily = guests.Where(x => x.HouseholdName == SelectedHouseholdName).ToList();
         if(notAttending.Count == wholeFamily.Count)
         {
+            var db = DbFactory.CreateDbContext();
+            var updatedGuests = guests.Where(x => x.HouseholdName == SelectedHouseholdName).ToList();
+            updatedGuests.ForEach(x => x.IsAttending = false);
+            db.Guests.UpdateRange(updatedGuests);
+            db.SaveChanges();
+            db.Dispose();
             NoOneComing = true;
         }
 

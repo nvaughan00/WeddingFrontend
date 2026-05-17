@@ -1,0 +1,97 @@
+@page "/admin/guests"
+@rendermode @(new InteractiveServerRenderMode(prerender: false))
+@using WeddingFrontend.Context
+@using WeddingFrontend.Models
+@using Microsoft.EntityFrameworkCore
+@inject IDbContextFactory<AppDbContext> DbFactory
+
+<div class="admin-page">
+    <h1 class="admin-title">Guest List</h1>
+
+    @if (guests == null)
+    {
+        <p class="admin-loading">Loading...</p>
+    }
+    else
+    {
+        <div class="admin-summary">
+            <span>@guests.Count total</span>
+            <span>@guests.Count(x => x.IsAttending) attending</span>
+            <span>@guests.Count(x => !x.IsAttending) not attending</span>
+            <span>@guests.Count(x => string.IsNullOrEmpty(x.Entree)) no entree selected</span>
+        </div>
+
+        <div class="grid-wrap">
+            <table class="guest-grid">
+                <thead>
+                    <tr>
+                        <th @onclick='() => Sort("Id")'>         # @SortIcon("Id")</th>
+                        <th @onclick='() => Sort("Name")'>       Name @SortIcon("Name")</th>
+                        <th @onclick='() => Sort("HouseholdName")'>Household @SortIcon("HouseholdName")</th>
+                        <th @onclick='() => Sort("IsAttending")'>Attending @SortIcon("IsAttending")</th>
+                        <th @onclick='() => Sort("Entree")'>     Entrée @SortIcon("Entree")</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var guest in SortedGuests())
+                    {
+                        <tr class="@(guest.IsAttending ? "" : "not-attending-row")">
+                            <td>@guest.Id</td>
+                            <td>@guest.Name</td>
+                            <td>@guest.HouseholdName</td>
+                            <td>
+                                <span class="badge @(guest.IsAttending ? "badge-yes" : "badge-no")">
+                                    @(guest.IsAttending ? "Yes" : "No")
+                                </span>
+                            </td>
+                            <td>@(string.IsNullOrEmpty(guest.Entree) ? "—" : guest.Entree)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
+
+@code {
+    private List<Guest>? guests;
+    private string sortColumn = "HouseholdName";
+    private bool sortAscending = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var db = DbFactory.CreateDbContext();
+        guests = await db.Guests.ToListAsync();
+    }
+
+    private void Sort(string column)
+    {
+        if (sortColumn == column)
+            sortAscending = !sortAscending;
+        else
+        {
+            sortColumn = column;
+            sortAscending = true;
+        }
+    }
+
+    private IEnumerable<Guest> SortedGuests()
+    {
+        if (guests == null) return Enumerable.Empty<Guest>();
+        return sortColumn switch
+        {
+            "Id"            => sortAscending ? guests.OrderBy(x => x.Id)            : guests.OrderByDescending(x => x.Id),
+            "Name"          => sortAscending ? guests.OrderBy(x => x.Name)          : guests.OrderByDescending(x => x.Name),
+            "HouseholdName" => sortAscending ? guests.OrderBy(x => x.HouseholdName) : guests.OrderByDescending(x => x.HouseholdName),
+            "IsAttending"   => sortAscending ? guests.OrderBy(x => x.IsAttending)   : guests.OrderByDescending(x => x.IsAttending),
+            "Entree"        => sortAscending ? guests.OrderBy(x => x.Entree)        : guests.OrderByDescending(x => x.Entree),
+            _               => guests
+        };
+    }
+
+    private string SortIcon(string column)
+    {
+        if (sortColumn != column) return "↕";
+        return sortAscending ? "↑" : "↓";
+    }
+}

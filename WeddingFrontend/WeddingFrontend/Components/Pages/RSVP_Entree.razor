@@ -3,41 +3,63 @@
 @inject IDbContextFactory<AppDbContext> DbFactory
 @inject IJSRuntime JS
 
+@using WeddingFrontend.Components.RSVPComponents
 @using WeddingFrontend.Context
 @using WeddingFrontend.Models
 
 <div class="row">
     <div class="col-6">
         <div class="rsvp-container">
-            @foreach(var name in Names)
+            <EntreeSelect Guest="@CurrentlySelectingEntree" OnEntreeSelected="GetSelectedEntree" Enabled="@(!AllEntreesSelected)"></EntreeSelect>
+
+            @if(AllEntreesSelected)
             {
-                <p class="rsvp-confirmation">@name</p>
+                <p class="rsvp-confirmation">Entrees Have Been Selected For Everyone, Thanks For RSVP'ing!</p>
             }
-            <p class="rsvp-confirmation">@HouseholdName</p>
         </div>
     </div>
 </div>
 
 @code {
     [SupplyParameterFromQuery]
-    public string[]? Names { get; set; }
+    public string[] Names { get; set; } = Array.Empty<string>();
 
     [SupplyParameterFromQuery]
-    public string? HouseholdName { get; set; }
+    public string HouseholdName { get; set; } = string.Empty;
 
     private List<Guest> guests { get; set; } = new List<Guest>();
-    private List<string> HouseholdNames { get; set; } = new List<string>();
+    private List<Guest> FamilyMembers { get; set; } = new List<Guest>();
+    private Guest? CurrentlySelectingEntree { get; set; }
+
+    private bool AllEntreesSelected { get; set; } = false;
+
+    private async Task GetSelectedEntree((Guest guest, string entree) selection)
+    {
+        var index = FamilyMembers.FindIndex(x => x.Id == selection.guest.Id);
+
+        if(index < FamilyMembers.Count - 1)
+        {
+            index++;
+        }
+        else
+        {
+            AllEntreesSelected = true;
+        }
+        using var db = DbFactory.CreateDbContext();
+        var guestToUpdate = db.Guests.First(x => x.Name == selection.guest.Name && x.HouseholdName == selection.guest.HouseholdName);
+        guestToUpdate.Entree = selection.entree;
+        db.Guests.Update(guestToUpdate);
+        await db.SaveChangesAsync();
+
+        CurrentlySelectingEntree = FamilyMembers[index];
+    }
 
     protected override async Task OnInitializedAsync()
     {
         using var db = DbFactory.CreateDbContext();
         guests = await db.Guests.ToListAsync();
 
-        HouseholdNames = guests.DistinctBy(x => x.HouseholdName).Select(x => x.HouseholdName).ToList();
-
-        foreach(var name in HouseholdNames)
-        {
-            var familyMembers = guests.Where(x => x.HouseholdName == name);
-        }
+        FamilyMembers = guests.Where(x => x.HouseholdName == HouseholdName && Names.Contains(x.Name)).ToList();
+        CurrentlySelectingEntree = FamilyMembers.First();
     }
 }

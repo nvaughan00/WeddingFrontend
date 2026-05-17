@@ -35,6 +35,25 @@ h1:focus {
     text-decoration: none !important;
 }
 
-h3 {
-    
+.entree-option.just-selected {
+    background: rgba(180, 140, 90, 0.12) !important;
+    border-color: #7a5c3a !important;
+    box-shadow: 0 4px 20px rgba(100, 70, 40, 0.2) !important;
+    transform: translateY(-2px) !important;
+}
+
+.entree-option.just-selected .entree-label {
+    color: #5a3c1a !important;
+    font-weight: 700 !important;
+}
+
+.entree-option.just-selected .entree-image-wrap {
+    border-color: rgba(122, 92, 58, 0.5) !important;
+}
+
+.entree-just-selected-active {
+    background: rgba(180, 140, 90, 0.12) !important;
+    border-color: #7a5c3a !important;
+    box-shadow: 0 4px 20px rgba(100, 70, 40, 0.2) !important;
+    transform: translateY(-2px) !important;
 }

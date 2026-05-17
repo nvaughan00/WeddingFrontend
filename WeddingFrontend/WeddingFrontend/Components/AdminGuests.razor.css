@@ -1,0 +1,132 @@
+.admin-page {
+    padding-top: 140px;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 60px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.admin-title {
+    font-family: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
+    font-size: 2.5rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: #7a5c3a;
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.admin-loading {
+    font-family: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
+    font-size: 1rem;
+    color: #a08060;
+    text-align: center;
+}
+
+.admin-summary {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-bottom: 28px;
+    font-family: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
+    font-size: 1rem;
+    letter-spacing: 0.07em;
+    color: #a08060;
+}
+
+.grid-wrap {
+    overflow-x: auto;
+    border-radius: 16px;
+    border: 1px solid rgba(180, 155, 120, 0.3);
+    box-shadow: 0 2px 20px rgba(100, 70, 40, 0.08);
+}
+
+.guest-grid {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(255, 252, 248, 0.95);
+    font-family: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
+}
+
+.guest-grid thead tr {
+    border-bottom: 1px solid rgba(180, 155, 120, 0.3);
+}
+
+.guest-grid th {
+    padding: 14px 20px;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    color: #a08060;
+    text-align: left;
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+    transition: color 0.2s;
+}
+
+.guest-grid th:hover {
+    color: #7a5c3a;
+}
+
+.guest-grid tbody tr {
+    border-bottom: 1px solid rgba(180, 155, 120, 0.12);
+    transition: background 0.15s;
+}
+
+.guest-grid tbody tr:last-child {
+    border-bottom: none;
+}
+
+.guest-grid tbody tr:hover {
+    background: rgba(180, 140, 90, 0.06);
+}
+
+.guest-grid td {
+    padding: 12px 20px;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    color: #5a4030;
+}
+
+.not-attending-row td {
+    opacity: 0.5;
+}
+
+.badge {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+}
+
+.badge-yes {
+    background: rgba(100, 160, 100, 0.15);
+    color: #4a7a4a;
+}
+
+.badge-no {
+    background: rgba(180, 80, 80, 0.12);
+    color: #9a4040;
+}
+
+@media (max-width: 600px) {
+    .admin-page {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .admin-summary {
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+
+    .guest-grid th,
+    .guest-grid td {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+    }
+}
