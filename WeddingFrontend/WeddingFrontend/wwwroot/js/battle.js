@@ -7,7 +7,7 @@ window.startBattle = function() {
 
     const TYPES = {
       elf:        { color:'#2d8a4e', accent:'#a8e6b8', hp:60,  spd:0.7, atk:12, range:90,  size:14, shape:'elf'        },
-      centaur:    { color:'#8B5E3C', accent:'#d4a574', hp:120, spd:0.5, atk:20, range:50,  size:20, shape:'centaur'    },
+      centaur:    { color:'#8B5E3C', accent:'#d4a574', hp:60, spd:0.5, atk:16, range:50,  size:20, shape:'centaur'    },
       satyr:      { color:'#7B3F9E', accent:'#d4a8f0', hp:70,  spd:0.9, atk:10, range:70,  size:15, shape:'satyr'      },
       rabbit:     { color:'#C0392B', accent:'#f0a8a8', hp:50,  spd:1.4, atk:15, range:40,  size:13, shape:'rabbit'     },
       tribesperson:{ color:'#B5651D', accent:'#f5c88a', hp:90,  spd:0.6, atk:18, range:60,  size:17, shape:'tribe'     },
@@ -213,10 +213,7 @@ window.startBattle = function() {
 
         if (frame % 120 === 0 && units.length < 100) {
         
-        addUnit(leftTypes[Math.floor(Math.random()*leftTypes.length)], 'left');
-        }
-
-        if (frame % 100 === 0 && units.length < 100) {
+            addUnit(leftTypes[Math.floor(Math.random() * leftTypes.length)], 'left');
             addUnit(rightTypes[Math.floor(Math.random() * rightTypes.length)], 'right');
         }
     }
