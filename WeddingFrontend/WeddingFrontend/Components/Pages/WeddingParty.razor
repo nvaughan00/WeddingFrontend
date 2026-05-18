@@ -1,19 +1,96 @@
 ﻿@page "/weddingparty"
-@using WeddingFrontend.Context
-@using WeddingFrontend.Models
 
-@inject IDbContextFactory<AppDbContext> DbFactory
-@rendermode InteractiveServer
+<div class="wp-page">
+    <h1 class="wp-title">Wedding Party</h1>
+    <p class="wp-subtitle">We're gonna give head to everyone mentioned here.</p>
 
+    <div class="wp-columns">
+        <div class="wp-column">
+            <h2 class="wp-column-title">Groomsmen</h2>
+            <div class="wp-list">
+                @foreach (var person in groomsmen)
+                {
+                    <div class="wp-card" @onclick="() => OnCardClick(person)">
+                        <div class="wp-img-wrap">
+                            <img src="images/test.jpg" alt="@person.Name" class="wp-img" />
+                        </div>
+                        <div class="wp-info">
+                            <p class="wp-name">@person.Name</p>
+                            <p class="wp-role">@person.Role</p>
+                            <p class="wp-bio">@person.Bio</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
 
+        <div class="wp-column">
+            <h2 class="wp-column-title">Bridesmaids</h2>
+            <div class="wp-list">
+                @foreach (var person in bridesmaids)
+                {
+                    <div class="wp-card" @onclick="() => OnCardClick(person)">
+                        <div class="wp-img-wrap">
+                            <img src="images/test.jpg" alt="@person.Name" class="wp-img" />
+                        </div>
+                        <div class="wp-info">
+                            <p class="wp-name">@person.Name</p>
+                            <p class="wp-role">@person.Role</p>
+                            <p class="wp-bio">@person.Bio</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="wp-mentions-section">
+        <h2 class="wp-column-title">Special Mentions</h2>
+        <div class="wp-mentions-list">
+            @foreach (var mention in specialMentions)
+            {
+                <div class="wp-mention">
+                    <div class="wp-mention-img-wrap">
+                        <img src="images/test.jpg" alt="@mention.Name" class="wp-mention-img" />
+                    </div>
+                    <p class="wp-mention-name">@mention.Name</p>
+                    <p class="wp-mention-note">@mention.Note</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
 
 @code {
-    private List<Guest>? guests;
-
-    protected override async Task OnInitializedAsync()
+    private void OnCardClick(WeddingPartyMember person)
     {
-        using var db = DbFactory.CreateDbContext();
-        guests = await db.Guests.ToListAsync();
+        Console.WriteLine($"Clicked: {person.Name}");
     }
 
+    private List<WeddingPartyMember> groomsmen = new()
+    {
+        new("James Smith",   "Best Man",      "James and Nick have been best friends since college. He once drove 6 hours just to help Nick move a couch.",      "images/party/james.jpg"),
+        new("Tom Baker",     "Groomsman",     "Tom is the group's designated chef and the reason Nick discovered his love of hot sauce.",                         "images/party/tom.jpg"),
+        new("Chris Johnson", "Groomsman",     "Chris has known Nick since kindergarten. He still hasn't let Nick forget about the bike incident of 1998.",        "images/party/chris.jpg"),
+        new("Mike Davis",    "Groomsman",     "Mike is Nick's cousin and the funniest person in any room he walks into. Speeches will be monitored.",             "images/party/mike.jpg"),
+    };
+
+    private List<WeddingPartyMember> bridesmaids = new()
+    {
+        new("Sarah Baker",   "Maid of Honor", "Sarah has been Whitney's ride-or-die since high school. She planned the most epic bachelorette trip imaginable.", "images/party/sarah.jpg"),
+        new("Emma Johnson",  "Bridesmaid",    "Emma and Whitney bonded over their shared obsession with reality TV and have never looked back.",                  "images/party/emma.jpg"),
+        new("Rachel Davis",  "Bridesmaid",    "Rachel is the most organized person Whitney knows — she had a spreadsheet for bridesmaid dress shopping.",         "images/party/rachel.jpg"),
+        new("Anna Wilson",   "Bridesmaid",    "Anna brings the energy to every room. She is also responsible for introducing Nick and Whitney.",                  "images/party/anna.jpg"),
+    };
+
+    private List<SpecialMention> specialMentions = new()
+    {
+        new("The Wilson Family",  "For their endless support and for always having an open door.",          "images/party/wilson-family.jpg"),
+        new("Grandma Rose",       "Whose love of dancing will absolutely be on display tonight.",           "images/party/grandma-rose.jpg"),
+        new("Uncle Dave",         "For agreeing to do the reading, despite claiming he 'doesn't do public speaking'.", "images/party/uncle-dave.jpg"),
+        new("The Dog, Biscuit",   "Honorary ring bearer and best boy.",                                    "images/party/biscuit.jpg"),
+    };
+
+    private record WeddingPartyMember(string Name, string Role, string Bio, string ImagePath);
+    private record SpecialMention(string Name, string Note, string ImagePath);
 }

@@ -1,21 +1,23 @@
 ﻿@page "/registry"
-@using WeddingFrontend.Context
-@using WeddingFrontend.Models
 
-@inject IDbContextFactory<AppDbContext> DbFactory
-@rendermode InteractiveServer
+<div class="registry-page">
+    <h1 class="registry-title">Registry</h1>
+    <p class="registry-subtitle">Your presence is truly the greatest gift.<br />But if you'd like to give something more, we'd be so grateful.</p>
 
-<a href="https://www.amazon.com/wedding/registry/YOURREGISTRYID" target="_blank" class="registry-btn">
-    View Our Registry
-</a>
+    <div class="registry-card">
+        <div class="registry-logo-wrap">
+            <img src="images/amazon.jpg" alt="Amazon" class="registry-logo" />
+        </div>
+        <p class="registry-description">
+            We've put together a wish list of things we love on Amazon.
+            From home essentials to a few fun extras — there's something for every budget.
+        </p>
+        <a class="registry-btn" href="https://www.amazon.com/" target="_blank">
+            View Our Amazon Registry
+        </a>
+    </div>
 
-@code {
-    private List<Guest>? guests;
-
-    protected override async Task OnInitializedAsync()
-    {
-        using var db = DbFactory.CreateDbContext();
-        guests = await db.Guests.ToListAsync();
-    }
-
-}
+    <p class="registry-note">
+        Can't find something you love? A heartfelt card means the world to us too.
+    </p>
+</div>

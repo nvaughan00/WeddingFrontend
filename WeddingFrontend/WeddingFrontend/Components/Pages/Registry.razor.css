@@ -1,0 +1,121 @@
+﻿.registry-page {
+    padding-top: 180px;
+    padding-bottom: 80px;
+    padding-left: 24px;
+    padding-right: 24px;
+    max-width: 640px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+}
+
+.registry-title {
+    font-family: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
+    font-size: 3rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: #7a5c3a;
+    text-align: center;
+    margin: 0;
+}
+
+.registry-subtitle {
+    font-family: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.07em;
+    color: #a08060;
+    text-align: center;
+    line-height: 1.8;
+    margin: 0;
+}
+
+.registry-card {
+    width: 100%;
+    background: rgba(255, 252, 248, 0.92);
+    border: 1px solid rgba(180, 155, 120, 0.35);
+    border-radius: 20px;
+    padding: 40px 32px;
+    box-shadow: 0 2px 20px rgba(100, 70, 40, 0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.registry-logo-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+}
+
+.registry-logo {
+    height: 40px;
+    object-fit: contain;
+}
+
+.registry-description {
+    font-family: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
+    font-size: 1.05rem;
+    letter-spacing: 0.06em;
+    color: #8a6848;
+    text-align: center;
+    line-height: 1.75;
+    margin: 0;
+}
+
+.registry-btn {
+    font-family: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
+    font-size: 1.05rem;
+    letter-spacing: 0.12em;
+    color: #fffcf8;
+    background: #7a5c3a;
+    border: none;
+    border-radius: 999px;
+    padding: 14px 44px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 2px 12px rgba(100, 70, 40, 0.2);
+    display: inline-block;
+    margin-top: 4px;
+}
+
+    .registry-btn:hover {
+        background: #9a7a50;
+        box-shadow: 0 4px 20px rgba(100, 70, 40, 0.28);
+        transform: translateY(-1px);
+        color: #fffcf8;
+    }
+
+    .registry-btn:active {
+        transform: scale(0.97);
+    }
+
+.registry-note {
+    font-family: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
+    font-size: 0.95rem;
+    letter-spacing: 0.07em;
+    color: #b0a080;
+    text-align: center;
+    font-style: italic;
+    margin: 0;
+}
+
+@media (max-width: 600px) {
+    .registry-title {
+        font-size: 2.2rem;
+    }
+
+    .registry-card {
+        padding: 28px 20px;
+    }
+
+    .registry-btn {
+        width: 90%;
+        text-align: center;
+        padding: 14px 24px;
+    }
+}

@@ -1,19 +1,21 @@
 ﻿@page "/"
-@using WeddingFrontend.Context
 @using WeddingFrontend.Models
 
-@inject IDbContextFactory<AppDbContext> DbFactory
+@inject IJSRuntime JS
 @rendermode InteractiveServer
 
-
+<div class="row">
+    <div class="col-12 d-flex justify-content-center">
+        <canvas id="c" width="680" height="420"></canvas>
+    </div>
+</div>
 
 @code {
     private List<Guest>? guests;
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        using var db = DbFactory.CreateDbContext();
-        guests = await db.Guests.ToListAsync();
+        await JS.InvokeVoidAsync("startBattle");
     }
 
 }
