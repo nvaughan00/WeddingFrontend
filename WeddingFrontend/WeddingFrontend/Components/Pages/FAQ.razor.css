@@ -1,0 +1,110 @@
+﻿.faq-page {
+    padding-top: 140px;
+    padding-bottom: 80px;
+    padding-left: 24px;
+    padding-right: 24px;
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.faq-title {
+    font-family: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
+    font-size: 3rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: #7a5c3a;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.faq-subtitle {
+    font-family: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.08em;
+    color: #a08060;
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.faq-item {
+    background: rgba(255, 252, 248, 0.92);
+    border: 1px solid rgba(180, 155, 120, 0.3);
+    border-radius: 14px;
+    padding: 20px 24px;
+    cursor: pointer;
+    transition: box-shadow 0.2s, border-color 0.2s;
+    box-shadow: 0 1px 8px rgba(100, 70, 40, 0.06);
+}
+
+    .faq-item:hover {
+        border-color: rgba(180, 155, 120, 0.55);
+        box-shadow: 0 4px 18px rgba(100, 70, 40, 0.1);
+    }
+
+    .faq-item.open {
+        border-color: rgba(122, 92, 58, 0.45);
+        box-shadow: 0 4px 20px rgba(100, 70, 40, 0.12);
+    }
+
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    font-family: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    color: #7a5c3a;
+}
+
+.faq-arrow {
+    width: 8px;
+    height: 8px;
+    border-right: 1.5px solid #7a5c3a;
+    border-bottom: 1.5px solid #7a5c3a;
+    transform: rotate(45deg);
+    transition: transform 0.25s ease;
+    flex-shrink: 0;
+    margin-bottom: 3px;
+}
+
+    .faq-arrow.open {
+        transform: rotate(-135deg);
+        margin-bottom: -3px;
+    }
+
+.faq-answer {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(180, 155, 120, 0.2);
+}
+
+    .faq-answer p {
+        font-family: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
+        font-size: 1rem;
+        letter-spacing: 0.05em;
+        color: #8a6848;
+        line-height: 1.7;
+        margin: 0;
+    }
+
+@media (max-width: 600px) {
+    .faq-title {
+        font-size: 2.2rem;
+    }
+
+    .faq-item {
+        padding: 16px 18px;
+    }
+
+    .faq-question {
+        font-size: 1rem;
+    }
+}

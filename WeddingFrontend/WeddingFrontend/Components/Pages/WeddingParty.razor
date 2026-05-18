@@ -1,0 +1,19 @@
+﻿@page "/weddingparty"
+@using WeddingFrontend.Context
+@using WeddingFrontend.Models
+
+@inject IDbContextFactory<AppDbContext> DbFactory
+@rendermode InteractiveServer
+
+
+
+@code {
+    private List<Guest>? guests;
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var db = DbFactory.CreateDbContext();
+        guests = await db.Guests.ToListAsync();
+    }
+
+}

@@ -1,0 +1,55 @@
+﻿@page "/faq"
+
+<div class="faq-page">
+    <h1 class="faq-title">FAQ</h1>
+    <p class="faq-subtitle">Everything you need to know about the big day.</p>
+
+    <div class="faq-list">
+        @foreach (var item in Faqs)
+        {
+            <div class="faq-item @(item.IsOpen ? "open" : "")" @onclick="() => Toggle(item)">
+                <div class="faq-question">
+                    <span>@item.Question</span>
+                    <span class="faq-arrow @(item.IsOpen ? "open" : "")"></span>
+                </div>
+                @if (item.IsOpen)
+                {
+                    <div class="faq-answer">
+                        <p>@item.Answer</p>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    private List<FaqItem> Faqs = new()
+    {
+        new FaqItem("When and where is the wedding?",
+            "BENIS BENIS BENIS BENIS BENIS BENIS BENIS BENISBENIS BENISBENIS BENISBENIS BENISBENIS BENISBENIS BENISBENIS BENIS"),
+        new FaqItem("Is there a dress code?",
+            "BENIS BENIS BENIS BENIS BENIS BENIS BENIS BENISBENIS BENISBENIS BENISBENIS BENISBENIS BENISBENIS BENISBENIS BENIS"),
+        new FaqItem("Are children welcome?",
+            "BENIS BENIS BENIS BENIS BENIS BENIS BENIS BENISBENIS BENISBENIS BENISBENIS BENISBENIS BENISBENIS BENISBENIS BENIS"),
+        new FaqItem("What time should I arrive?",
+            "BENIS BENIS BENIS BENIS BENIS BENIS BENIS BENISBENIS BENISBENIS BENISBENIS BENISBENIS BENISBENIS BENISBENIS BENIS"),
+        new FaqItem("Is there parking available?",
+            "BENIS BENIS BENIS BENIS BENIS BENIS BENIS BENISBENIS BENISBENIS BENISBENIS BENISBENIS BENISBENIS BENISBENIS BENIS"),
+    };
+
+    private void Toggle(FaqItem item) => item.IsOpen = !item.IsOpen;
+
+    private class FaqItem
+    {
+        public string Question { get; set; }
+        public string Answer { get; set; }
+        public bool IsOpen { get; set; } = false;
+
+        public FaqItem(string question, string answer)
+        {
+            Question = question;
+            Answer = answer;
+        }
+    }
+}

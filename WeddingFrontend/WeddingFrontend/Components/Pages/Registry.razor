@@ -1,0 +1,21 @@
+﻿@page "/registry"
+@using WeddingFrontend.Context
+@using WeddingFrontend.Models
+
+@inject IDbContextFactory<AppDbContext> DbFactory
+@rendermode InteractiveServer
+
+<a href="https://www.amazon.com/wedding/registry/YOURREGISTRYID" target="_blank" class="registry-btn">
+    View Our Registry
+</a>
+
+@code {
+    private List<Guest>? guests;
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var db = DbFactory.CreateDbContext();
+        guests = await db.Guests.ToListAsync();
+    }
+
+}
