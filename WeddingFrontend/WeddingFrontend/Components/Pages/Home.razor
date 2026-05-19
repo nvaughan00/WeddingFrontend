@@ -4,18 +4,15 @@
 @inject IJSRuntime JS
 @rendermode InteractiveServer
 
-<div class="row">
+<div class="row mt-5">
     <div class="col-12 d-flex justify-content-center">
-        <canvas id="c" width="680" height="420"></canvas>
+        <Battle></Battle>
     </div>
 </div>
 
 @code {
     private List<Guest>? guests;
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await JS.InvokeVoidAsync("startBattle");
-    }
+    
 
 }
