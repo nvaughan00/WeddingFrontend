@@ -1,10 +1,14 @@
-﻿<div class="battle-container">
+﻿@using WeddingFrontend.Context
+@using WeddingFrontend.Models
+@inject IDbContextFactory<AppDbContext> DbFactory
+
+<div class="battle-container">
     <div class="battle-header">
         <h3>Nick vs. Whitney</h3>
     </div>
     <div class="battle-labels">
         <span class="battle-label left-label">@LeftLabel</span>
-        <span class="battle-score">@LeftScore — @RightScore</span>
+        <span class="battle-score">@Score.NickScore — @Score.WhitneyScore</span>
         <span class="battle-label right-label">@RightLabel</span>
     </div>
 
@@ -32,13 +36,45 @@
     [Parameter] public string LeftLabel { get; set; } = "Nick";
     [Parameter] public string RightLabel { get; set; } = "Whitney";
 
-    private int LeftScore = 1;
-    private int RightScore = 1;
+    private Score Score { get; set; } = new Score();
 
-    private int Total => LeftScore + RightScore;
-    private int LeftPercent => (int)Math.Round((double)LeftScore / Total * 100);
+    private int Total => Score.NickScore + Score.WhitneyScore;
+    private int LeftPercent => (int)Math.Round((double)Score.NickScore / Total * 100);
     private int RightPercent => 100 - LeftPercent;
 
-    private void IncrementLeft() => LeftScore++;
-    private void IncrementRight() => RightScore++;
+    private AppDbContext DbContext { get; set; }
+
+    private async Task IncrementLeft()
+    {
+        Score.NickScore++;
+        var score = DbContext.Score.First();
+        score.NickScore = Score.NickScore;
+
+        DbContext?.Score.Update(score);
+        await DbContext.SaveChangesAsync();
+    }
+
+    private async Task IncrementRight()
+    {
+        Score.WhitneyScore++;
+        var score = DbContext.Score.First();
+        score.WhitneyScore = Score.WhitneyScore;
+
+        DbContext?.Score.Update(score);
+        await DbContext.SaveChangesAsync();
+    }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        DbContext = DbFactory.CreateDbContext();
+
+        if(DbContext.Score.Count() == 0)
+        {
+            DbContext.Score.Add(new Score());
+            await DbContext.SaveChangesAsync();
+        }
+
+        Score = DbContext.Score.First();
+    }
 }

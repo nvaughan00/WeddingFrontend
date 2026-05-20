@@ -8,5 +8,6 @@ namespace WeddingFrontend.Context
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         public DbSet<Guest> Guests { get; set; }
+        public DbSet<Score> Score { get; set; }
     }
 }
