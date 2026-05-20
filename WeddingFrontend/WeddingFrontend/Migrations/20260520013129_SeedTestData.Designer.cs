@@ -10,7 +10,7 @@ using WeddingFrontend.Context;
 namespace WeddingFrontend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260515022712_SeedTestData")]
+    [Migration("20260520013129_SeedTestData")]
     partial class SeedTestData
     {
         /// <inheritdoc />
@@ -34,6 +34,9 @@ namespace WeddingFrontend.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("IsAttending")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsChild")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")

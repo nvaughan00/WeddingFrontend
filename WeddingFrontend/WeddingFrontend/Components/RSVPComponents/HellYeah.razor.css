@@ -46,6 +46,8 @@
 }
 
 #hell-yeah-sub {
+    margin-top: 20px;
+    margin-bottom: 20px;
     font-family: 'Bangers', cursive;
     font-size: 32px;
     color: #FFF;
@@ -87,4 +89,22 @@
 
 #continue-btn:hover {
     background: #FFF200;
+}
+
+@media (max-width: 600px) {
+    #hell-yeah-sub {
+        width: 80%;
+    }
+
+    #continue-btn {
+        width: 90%;
+    }
+
+    #hell-yeah-content {
+        width: 80%;
+    }
+    #explosion-canvas {
+        width: 95%;
+        left: 2.5%;
+    }
 }

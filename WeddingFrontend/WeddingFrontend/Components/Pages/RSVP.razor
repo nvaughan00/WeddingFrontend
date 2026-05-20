@@ -2,6 +2,7 @@
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
 @inject IDbContextFactory<AppDbContext> DbFactory
 @inject NavigationManager Nav
+@inject IJSRuntime JS
 
 @using WeddingFrontend.Context
 @using WeddingFrontend.Models
@@ -49,8 +50,8 @@
     private List<Guest> guests { get; set; } = new List<Guest>();
     private List<Household> Households = new List<Household>();
     private List<string> HouseholdNames = new List<string>();
-    private string? SelectedHouseholdName;
-    private bool? AllAttending;
+    private string? SelectedHouseholdName { get; set; }
+    private bool? AllAttending { get; set; }
     private bool ShowHellYeah { get; set; } = false;
 
     private List<Guest> AttendingFromFamily { get; set; } = new List<Guest>();
@@ -79,11 +80,25 @@
         db.Dispose();
 
         var queryNames = string.Join("&", AttendingFromFamily.Select(x => $"Names={Uri.EscapeDataString(x.Name)}"));
-        Nav.NavigateTo($"/rsvp/entree-selection?{queryNames}&HouseholdName={SelectedHouseholdName}");
+        var householdNameEscaped = Uri.EscapeDataString(SelectedHouseholdName);
+        Nav.NavigateTo($"/rsvp/entree-selection?{queryNames}&HouseholdName={householdNameEscaped}");
     }
 
-    private void GetSelectedHouseholdName(string data) => SelectedHouseholdName = data;
-    private void GetYesNoValue(bool? val) 
+    private async Task GetSelectedHouseholdName(string data) 
+    {
+        SelectedHouseholdName = data;
+
+        AllAttending = null;
+        AttendingFromFamily = new();
+        HasSubmitted = false;
+        NoOneComing = false;
+
+        StateHasChanged();
+        await Task.Yield(); // let Blazor render first
+        await JS.InvokeVoidAsync("scrollToElement", "yesno");
+        await Task.CompletedTask;
+    }
+    private async Task GetYesNoValue(bool? val) 
     {
         AllAttending = val;
 
@@ -94,13 +109,15 @@
             var updatedGuests = guests.Where(x => x.HouseholdName == SelectedHouseholdName).ToList();
             updatedGuests.ForEach(x => x.IsAttending = true);
             db.Guests.UpdateRange(updatedGuests);
-            db.SaveChanges();
-            db.Dispose();
+            await db.SaveChangesAsync();
+            await db.DisposeAsync();
         }
         else
         {
             ShowHellYeah = false;
         }
+
+        await Task.CompletedTask;
     }
 
     private Task GetAttendingFromFamily(List<Guest> notAttending)

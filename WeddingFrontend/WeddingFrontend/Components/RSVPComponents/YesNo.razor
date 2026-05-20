@@ -1,6 +1,6 @@
 @inject IJSRuntime JS
 
-<div class="yn-wrap">
+<div class="yn-wrap" id="yesno">
     @if (!string.IsNullOrEmpty(Label))
     {
         <label class="yn-label">@Label <i>(@(string.Join(", ", FamilyNames )))</i></label>

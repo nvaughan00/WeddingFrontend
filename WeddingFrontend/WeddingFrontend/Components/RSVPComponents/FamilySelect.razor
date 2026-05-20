@@ -2,7 +2,7 @@
     <h1 class="rsvp-title">RSVP</h1>
     <p class="rsvp-subtitle">Please select your household to begin.</p>
 
-    <div class="dropdown-wrap">
+    <div class="dropdown-wrap" style="@(isOpen ? "margin-bottom: 30vh" : "margin-bottom: 0")">
         @if (HouseholdNames.Any())
         {
             <div class="custom-select @(isOpen ? "open" : "")">

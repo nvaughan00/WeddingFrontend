@@ -27,6 +27,7 @@
         await OnContinue.InvokeAsync();
 
         var queryNames = string.Join("&", Names.Select(x => $"Names={Uri.EscapeDataString(x)}"));
-        Nav.NavigateTo($"/rsvp/entree-selection?{queryNames}&HouseholdName={HouseholdName}");
+        var householdNameEscaped = Uri.EscapeDataString(HouseholdName);
+        Nav.NavigateTo($"/rsvp/entree-selection?{queryNames}&HouseholdName={householdNameEscaped}");
     }
 }

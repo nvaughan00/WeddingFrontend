@@ -3,6 +3,7 @@
     flex-direction: column;
     align-items: center;
     background: transparent;
+    padding-bottom: 24px;
 }
 
 .rsvp-title {
@@ -116,17 +117,17 @@
     transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-    .custom-select-display::after {
-        content: '';
-        width: 8px;
-        height: 8px;
-        border-right: 1.5px solid #7a5c3a;
-        border-bottom: 1.5px solid #7a5c3a;
-        transform: rotate(45deg);
-        transition: transform 0.2s ease;
-        flex-shrink: 0;
-        margin-bottom: 3px;
-    }
+.custom-select-display::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-right: 1.5px solid #7a5c3a;
+    border-bottom: 1.5px solid #7a5c3a;
+    transform: rotate(45deg);
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+    margin-bottom: 3px;
+}
 
 .custom-select.open .custom-select-display::after {
     transform: rotate(-135deg);
@@ -161,6 +162,14 @@
     border-radius: 0 0 12px 12px;
     box-shadow: 0 8px 24px rgba(100, 70, 40, 0.12);
     z-index: 100;
+    max-height: 30vh;
+    overflow-y: scroll; /* force clip, not just "if needed" */
+    scrollbar-width: none; /* hides scrollbar on Firefox */
+    -ms-overflow-style: none; /* hides on IE/Edge */
+}
+
+.custom-options::-webkit-scrollbar {
+    display: none;
 }
 
 .custom-option {
@@ -173,11 +182,11 @@
     transition: background 0.15s;
 }
 
-    .custom-option:hover {
-        background: rgba(180, 140, 90, 0.1);
-    }
+.custom-option:hover {
+    background: rgba(180, 140, 90, 0.1);
+}
 
-    .custom-option.selected {
-        font-weight: 600;
-        background: rgba(180, 140, 90, 0.15);
-    }
+.custom-option.selected {
+    font-weight: 600;
+    background: rgba(180, 140, 90, 0.15);
+}

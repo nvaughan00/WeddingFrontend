@@ -216,3 +216,8 @@ window.playBoo = function () {
     audio.play();
     window._hellYeahAudio = audio;
 }
+
+window.scrollToElement = (id) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}

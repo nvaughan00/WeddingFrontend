@@ -4,14 +4,15 @@
     <p class="entree-guest-name">- Select An Entree For -</p>
     <p class="entree-guest-name">@Guest.Name</p>
     <div class="entree-options">
-        @foreach (var option in entrees)
+        @foreach (var option in Entrees)
         {
-            <div class="entree-option @(SelectedEntree == option ? "selected" : "") @(justSelectedEntree == option ? "entree-just-selected-active" : "") @(!Enabled ? "entree-option-disabled" : "")"
-                 @onclick="() => { if (Enabled) SelectEntree(option); }">
+            <div class="entree-option @(SelectedEntree == option.Name ? "selected" : "") @(justSelectedEntree == option.Name ? "entree-just-selected-active" : "") @(!Enabled ? "entree-option-disabled" : "")"
+                 @onclick="() => { if (Enabled) SelectEntree(option.Name); }">
                 <div class="entree-image-wrap">
-                    <img class="entree-image" src="images/@(option.ToLower()).jpg" alt="@option" />
+                    <img class="entree-image" src="images/@(option.Name.ToLower()).jpg" alt="@option" />
                 </div>
-                <p class="entree-label">@option</p>
+                <p class="entree-label">@option.Name</p>
+                <p class="entree-label"><i>@option.Description</i></p>
             </div>
         }
     </div>
@@ -36,8 +37,14 @@
 
     private string SelectedEntree { get; set; } = string.Empty;
     private string? justSelectedEntree = null;
-    private List<string> entrees = new() { "Steak", "Salmon", "Pasta" };
+    private List<Entree> Entrees = new List<Entree>() {  
+        new("Steak", "8 oz. Peppercorn Encrusted Filet served with Au Gratin Potatoes & Sautéed Mushrooms."),
+        new("Salmon", "Pan-Seared Salmon Served with Dijon Aioli or Sun-Dried Tomato Compote, Mashed Potatoes & Grilled Asparagus"),
+        new("Pasta", "Linguine Pasta Tossed with Green Peas and Argentine Reggianito Cheese in a Roasted Garlic Cream Sauce, topped with Crispy Pancetta."),
+    };
     private bool showSaved = false;
+
+    public record Entree(string Name, string Description);
 
     protected override void OnParametersSet()
     {
@@ -57,6 +64,7 @@
         if (string.IsNullOrEmpty(SelectedEntree)) return;
         showSaved = true;
         justSelectedEntree = null;
+        SelectedEntree = null;
         await OnEntreeSelected.InvokeAsync((Guest, SelectedEntree));
 
         await Task.Delay(2000);
