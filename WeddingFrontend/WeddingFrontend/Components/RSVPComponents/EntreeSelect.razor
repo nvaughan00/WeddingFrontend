@@ -3,19 +3,38 @@
 <div class="entree-card @(!Enabled ? "entree-disabled" : "")">
     <p class="entree-guest-name">- Select An Entree For -</p>
     <p class="entree-guest-name">@Guest.Name</p>
-    <div class="entree-options">
-        @foreach (var option in Entrees)
-        {
-            <div class="entree-option @(SelectedEntree == option.Name ? "selected" : "") @(justSelectedEntree == option.Name ? "entree-just-selected-active" : "") @(!Enabled ? "entree-option-disabled" : "")"
-                 @onclick="() => { if (Enabled) SelectEntree(option.Name); }">
-                <div class="entree-image-wrap">
-                    <img class="entree-image" src="images/@(option.Name.ToLower()).jpg" alt="@option" />
+
+    @if (!Guest.IsChild)
+    {
+        <div class="entree-options">
+            @foreach (var option in Entrees)
+            {
+                <div class="entree-option @(SelectedEntree == option.Name ? "selected" : "") @(justSelectedEntree == option.Name ? "entree-just-selected-active" : "") @(!Enabled ? "entree-option-disabled" : "")"
+                @onclick="() => { if (Enabled) SelectEntree(option.Name); }">
+                    <div class="entree-image-wrap">
+                        <img class="entree-image" src="images/@(option.Name.ToLower()).jpg" alt="@option" />
+                    </div>
+                    <p class="entree-label">@option.Name</p>
+                    <p class="entree-label"><i>@option.Description</i></p>
                 </div>
-                <p class="entree-label">@option.Name</p>
-                <p class="entree-label"><i>@option.Description</i></p>
-            </div>
-        }
-    </div>
+            }
+        </div>
+    }
+    else {
+        <div class="entree-options">
+            @foreach (var option in ChildEntrees)
+            {
+                <div class="entree-option @(SelectedEntree == option.Name ? "selected" : "") @(justSelectedEntree == option.Name ? "entree-just-selected-active" : "") @(!Enabled ? "entree-option-disabled" : "")"
+                     @onclick="() => { if (Enabled) SelectEntree(option.Name); }">
+                    <div class="entree-image-wrap">
+                        <img class="entree-image" src="images/@(option.Name.ToLower()).jpg" alt="@option" />
+                    </div>
+                    <p class="entree-label">@option.Name</p>
+                    <p class="entree-label"><i>@option.Description</i></p>
+                </div>
+            }
+        </div>
+    }
 
     @if (!string.IsNullOrEmpty(SelectedEntree) && Enabled)
     {
@@ -37,14 +56,28 @@
 
     private string SelectedEntree { get; set; } = string.Empty;
     private string? justSelectedEntree = null;
-    private List<Entree> Entrees = new List<Entree>() {  
-        new("Steak", "8 oz. Peppercorn Encrusted Filet served with Au Gratin Potatoes & Sautéed Mushrooms."),
-        new("Salmon", "Pan-Seared Salmon Served with Dijon Aioli or Sun-Dried Tomato Compote, Mashed Potatoes & Grilled Asparagus"),
-        new("Pasta", "Linguine Pasta Tossed with Green Peas and Argentine Reggianito Cheese in a Roasted Garlic Cream Sauce, topped with Crispy Pancetta."),
-    };
+    private List<Entree> Entrees = new List<Entree>();
+    private List<Entree> ChildEntrees = new List<Entree>();
     private bool showSaved = false;
 
     public record Entree(string Name, string Description);
+
+    protected override void OnInitialized()
+    {
+        Entrees = new List<Entree>()
+        {
+            new("Steak", "8 oz. Peppercorn Encrusted Filet served with Au Gratin Potatoes & Sautéed Mushrooms."),
+            new("Salmon", "Pan-Seared Salmon Served with Dijon Aioli or Sun-Dried Tomato Compote, Mashed Potatoes & Grilled Asparagus"),
+            new("Pasta", "Linguine Pasta Tossed with Green Peas and Argentine Reggianito Cheese in a Roasted Garlic Cream Sauce, topped with Crispy Pancetta."),
+        };
+
+        ChildEntrees = new List<Entree>()
+        {
+            new("Chicken Tenders", "Broaster Chicken Tenders served with Fries"),
+        };
+
+        base.OnInitialized();
+    }
 
     protected override void OnParametersSet()
     {
@@ -64,8 +97,8 @@
         if (string.IsNullOrEmpty(SelectedEntree)) return;
         showSaved = true;
         justSelectedEntree = null;
-        SelectedEntree = null;
         await OnEntreeSelected.InvokeAsync((Guest, SelectedEntree));
+        SelectedEntree = null;
 
         await Task.Delay(2000);
         showSaved = false;

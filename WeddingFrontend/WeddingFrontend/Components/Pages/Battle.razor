@@ -2,33 +2,43 @@
 @using WeddingFrontend.Models
 @inject IDbContextFactory<AppDbContext> DbFactory
 
-<div class="battle-container">
-    <div class="battle-header">
-        <h3>Nick vs. Whitney</h3>
-    </div>
-    <div class="battle-labels">
-        <span class="battle-label left-label">@LeftLabel</span>
-        <span class="battle-score">@Score.NickScore — @Score.WhitneyScore</span>
-        <span class="battle-label right-label">@RightLabel</span>
-    </div>
-
-    <div class="battle-bar-track">
-        <div class="battle-bar-left" style="width: @(LeftPercent)%">
-            <span class="battle-bar-pct">@LeftPercent%</span>
+<div class="battle-page">
+    <div class="battle-container">
+        <div class="battle-header">
+            <h3>Nick vs. Whitney</h3>
         </div>
-        <div class="battle-divider"></div>
-        <div class="battle-bar-right" style="width: @(RightPercent)%">
-            <span class="battle-bar-pct">@RightPercent%</span>
+        <div class="battle-labels">
+            <span class="battle-label left-label">@LeftLabel</span>
+            <span class="battle-score">@Score.NickScore — @Score.WhitneyScore</span>
+            <span class="battle-label right-label">@RightLabel</span>
         </div>
-    </div>
 
-    <div class="battle-buttons">
-        <button class="battle-btn left-btn" @onclick="IncrementLeft">
-            + @LeftLabel
-        </button>
-        <button class="battle-btn right-btn" @onclick="IncrementRight">
-            + @RightLabel
-        </button>
+        <div class="battle-bar-track">
+            <div class="battle-bar-left" style="width: @(LeftPercent)%">
+                <span class="battle-bar-pct">@LeftPercent%</span>
+            </div>
+            <div class="battle-divider"></div>
+            <div class="battle-bar-right" style="width: @(RightPercent)%">
+                <span class="battle-bar-pct">@RightPercent%</span>
+            </div>
+        </div>
+
+        <div class="battle-buttons">
+            <button class="battle-btn left-btn" @onclick="IncrementLeft">
+                + @LeftLabel
+            </button>
+            <button class="battle-btn right-btn" @onclick="IncrementRight">
+                + @RightLabel
+            </button>
+        </div>
+        <div class="battle-title">
+            Our Story ♥
+        </div>
+        <div class="battle-subtitle">
+                coffee-desu coffee-desucoffee-desucoffee-desucoffee-desucoffee-desu coffee-desu coffee-desucoffee-desucoffee-desucoffee-desucoffee-desu coffee-desu 
+                coffee-desucoffee-desucoffee-desucoffee-desucoffee-desu coffee-desu coffee-desucoffee-desucoffee-desucoffee-desucoffee-desu coffee-desu coffee-desucoffee-desuc
+                offee-desucoffee-desucoffee-desu
+        </div>
     </div>
 </div>
 

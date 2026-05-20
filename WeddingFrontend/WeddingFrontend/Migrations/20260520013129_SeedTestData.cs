@@ -83,6 +83,7 @@ namespace WeddingFrontend.Migrations
                     { "Natalie Vaughan", false,  "",    "Duffy Vaughan & Family", false },
                     { "Leo Vaughan", false,  "",    "Duffy Vaughan & Family", false },
                     { "Grace Vaughan", false,  "",    "Duffy Vaughan & Family", false },
+                    { "Theresa Vaughan", false, "", "Theresa Vaughan", false},
                     { "Matt Ring", false,  "",    "Ring Family", false },
                     { "Jenny Ring", false,  "",    "Ring Family", false },
                     { "Olivia Trafton", false,  "",    "Trafton Family", false },
