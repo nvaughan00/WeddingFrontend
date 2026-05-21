@@ -1,0 +1,216 @@
+﻿/* =========================================
+   BASE
+========================================= */
+
+.glimbo-wrap {
+    position: fixed;
+    bottom: 12%;
+    z-index: 9999;
+    pointer-events: none;
+    width: 340px;
+    height: 240px;
+    overflow: visible;
+}
+
+    .glimbo-wrap.idle {
+        display: none;
+    }
+
+/* =========================================
+   FACE WRAPPER
+========================================= */
+
+.glimbo-face {
+    position: absolute;
+    width: 220px;
+    height: 220px;
+}
+
+/* =========================================
+   HEAD IMAGE
+========================================= */
+
+.glimbo-img {
+    position: absolute;
+    width: 190px;
+    height: auto;
+    z-index: 3;
+    animation: glimbo-bob 3s ease-in-out infinite;
+}
+
+/* =========================================
+   NECK
+========================================= */
+
+.glimbo-neck {
+    position: absolute;
+    width: 0;
+    height: 40px;
+    z-index: 1;
+    background: linear-gradient(180deg, rgb(106,148,48), rgb(154,190,84));
+}
+
+/* =========================================
+   RIGHT SIDE
+========================================= */
+
+.glimbo-wrap.right {
+    right: 0;
+    transform: translateX(100%);
+}
+
+    /* HEAD */
+    .glimbo-wrap.right .glimbo-img {
+        left: 18px;
+        top: 18px;
+        transform: scaleX(-1) rotate(-290deg);
+        transform-origin: center center;
+    }
+
+    /* NECK — grows from right wall leftward toward head */
+    .glimbo-wrap.right .glimbo-neck {
+        right: -10px;
+        top: 128px;
+        transform: rotate(0deg);
+        transform-origin: right center;
+        border-radius: 18px 0 0 18px;
+    }
+
+/* =========================================
+   LEFT SIDE
+========================================= */
+
+.glimbo-wrap.left {
+    left: 0;
+    transform: translateX(-100%);
+}
+
+    /* HEAD */
+    .glimbo-wrap.left .glimbo-img {
+        right: 18px;
+        top: 18px;
+        transform: rotate(72deg);
+        transform-origin: center center;
+    }
+
+    /* NECK — grows from left wall rightward toward head */
+    .glimbo-wrap.left .glimbo-neck {
+        left: -10px;
+        top: 128px;
+        transform: rotate(0deg);
+        transform-origin: left center;
+        border-radius: 0 18px 18px 0;
+    }
+
+/* =========================================
+   PEEKING / RETREATING
+========================================= */
+
+.glimbo-wrap.right.peeking {
+    animation: slide-right 1.6s cubic-bezier(.22,1.2,.36,1) forwards;
+}
+
+.glimbo-wrap.left.peeking {
+    animation: slide-left 1.6s cubic-bezier(.22,1.2,.36,1) forwards;
+}
+
+.glimbo-wrap.right.retreating {
+    animation: retreat-right .7s ease-in forwards;
+}
+
+.glimbo-wrap.left.retreating {
+    animation: retreat-left .7s ease-in forwards;
+}
+
+.glimbo-wrap.peeking .glimbo-neck {
+    animation: neck-grow 1.6s cubic-bezier(.22,1.2,.36,1) forwards, neck-pulse 1.8s ease-in-out infinite;
+}
+
+.glimbo-wrap.retreating .glimbo-neck {
+    animation: neck-shrink .7s ease-in forwards;
+}
+
+/* =========================================
+   SLIDE KEYFRAMES
+========================================= */
+
+@keyframes slide-right {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(25%);
+    }
+}
+
+@keyframes retreat-right {
+    from {
+        transform: translateX(25%);
+    }
+
+    to {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes slide-left {
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(-25%);
+    }
+}
+
+@keyframes retreat-left {
+    from {
+        transform: translateX(-25%);
+    }
+
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+/* =========================================
+   NECK KEYFRAMES
+   200px — long enough to bridge the gap and
+   tuck behind the head. Tune if needed.
+========================================= */
+
+@keyframes neck-grow {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 200px;
+    }
+}
+
+@keyframes neck-shrink {
+    from {
+        width: 200px;
+    }
+
+    to {
+        width: 0;
+    }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+    .glimbo-wrap {
+        width: 250px;
+        height: 190px;
+    }
+
+    .glimbo-img {
+        width: 145px;
+    }
+}

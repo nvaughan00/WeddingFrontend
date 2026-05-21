@@ -1,0 +1,43 @@
+@implements IDisposable
+
+<div class="glimbo-wrap @(_side) @(_state)" aria-hidden="true">
+    <div class="glimbo-neck"></div>
+    <img src="@ImageSrc" class="glimbo-img" alt="Glimbo" />
+</div>
+
+@code {
+    [Parameter] public string ImageSrc { get; set; } = "/images/glimbo.png";
+    [Parameter] public int CheckIntervalMs { get; set; } = 8000;
+    [Parameter] public double AppearChance { get; set; } = 0.95;
+    [Parameter] public int PeekDurationMs { get; set; } = 4000;
+
+    private string _state = "idle";
+    private string _side = "right";
+    private System.Threading.Timer? _timer;
+    private readonly Random _rng = new();
+
+    protected override void OnInitialized()
+    {
+        _timer = new System.Threading.Timer(async _ =>
+        {
+            if (_state != "idle") return;
+            if (_rng.NextDouble() >= AppearChance) return;
+
+            _side = _rng.NextDouble() > 0.5 ? "right" : "left";
+            _state = "peeking";
+            await InvokeAsync(StateHasChanged);
+
+            await Task.Delay(PeekDurationMs);
+
+            _state = "retreating";
+            await InvokeAsync(StateHasChanged);
+
+            await Task.Delay(600);
+
+            _state = "idle";
+            await InvokeAsync(StateHasChanged);
+        }, null, CheckIntervalMs, CheckIntervalMs);
+    }
+
+    public void Dispose() => _timer?.Dispose();
+}
