@@ -4,27 +4,30 @@
 
 .glimbo-wrap {
     position: fixed;
-    bottom: 12%;
     z-index: 9999;
     pointer-events: none;
     width: 255px;
     height: 200px;
     overflow: visible;
+    animation-fill-mode: forwards;
+    --glimbo-rest-x: 100%;
+    --glimbo-rest-y: -50%;
+    --glimbo-peek-x: 25%;
+    --glimbo-peek-y: -50%;
+    transform: translate(var(--glimbo-rest-x), var(--glimbo-rest-y));
 }
 
     .glimbo-wrap.idle {
         display: none;
     }
 
-/* =========================================
-   FACE WRAPPER
-========================================= */
+    .glimbo-wrap.peeking {
+        animation: glimbo-peek 1.6s cubic-bezier(.22,1.2,.36,1) forwards;
+    }
 
-.glimbo-face {
-    position: absolute;
-    width: 220px;
-    height: 220px;
-}
+    .glimbo-wrap.retreating {
+        animation: glimbo-retreat .7s ease-in forwards;
+    }
 
 /* =========================================
    HEAD IMAGE
@@ -36,112 +39,180 @@
     height: auto;
     z-index: 3;
     animation: glimbo-bob 3s ease-in-out infinite;
+    transform-origin: center center;
 }
 
 /* =========================================
    RIGHT SIDE
 ========================================= */
 
-.glimbo-wrap.right {
+.glimbo-wrap.anchor-right {
     right: 0;
-    transform: translateX(40%);
+    top: 50%;
+    --glimbo-rest-x: 100%;
+    --glimbo-rest-y: -50%;
+    --glimbo-peek-x: 25%;
+    --glimbo-peek-y: -50%;
 }
 
-    /* HEAD */
-    .glimbo-wrap.right .glimbo-img {
+    .glimbo-wrap.anchor-right .glimbo-img {
         left: 18px;
         top: 18px;
         transform: scaleX(-1) rotate(-290deg);
-        transform-origin: center center;
-    }
-
-    /* NECK — grows from right wall leftward toward head */
-    .glimbo-wrap.right .glimbo-neck {
-        right: -10px;
-        top: 128px;
-        transform: rotate(0deg);
-        transform-origin: right center;
-        border-radius: 18px 0 0 18px;
     }
 
 /* =========================================
    LEFT SIDE
 ========================================= */
 
-.glimbo-wrap.left {
+.glimbo-wrap.anchor-left {
     left: 0;
-    transform: translateX(-1%);
+    top: 50%;
+    --glimbo-rest-x: -100%;
+    --glimbo-rest-y: -50%;
+    --glimbo-peek-x: -25%;
+    --glimbo-peek-y: -50%;
 }
 
-/* HEAD */
-.glimbo-wrap.left .glimbo-img {
-    right: 18px;
-    top: 18px;
-    transform: rotate(72deg);
-    transform-origin: center center;
-}
+    .glimbo-wrap.anchor-left .glimbo-img {
+        right: 18px;
+        top: 18px;
+        transform: rotate(72deg);
+    }
 
 /* =========================================
-   PEEKING / RETREATING
+   TOP SIDE
 ========================================= */
 
-.glimbo-wrap.right.peeking {
-    animation: slide-right 1.6s cubic-bezier(.22,1.2,.36,1) forwards;
+.glimbo-wrap.anchor-top {
+    top: 0;
+    left: 50%;
+    --glimbo-rest-x: -50%;
+    --glimbo-rest-y: -100%;
+    --glimbo-peek-x: -50%;
+    --glimbo-peek-y: -25%;
 }
 
-.glimbo-wrap.left.peeking {
-    animation: slide-left 1.6s cubic-bezier(.22,1.2,.36,1) forwards;
-}
-
-.glimbo-wrap.right.retreating {
-    animation: retreat-right .7s ease-in forwards;
-}
-
-.glimbo-wrap.left.retreating {
-    animation: retreat-left .7s ease-in forwards;
-}
+    .glimbo-wrap.anchor-top .glimbo-img {
+        left: 50%;
+        top: 18px;
+        transform: translateX(-50%) rotate(160deg);
+    }
 
 /* =========================================
-   SLIDE KEYFRAMES
+   BOTTOM SIDE
 ========================================= */
 
-@keyframes slide-right {
+.glimbo-wrap.anchor-bottom {
+    bottom: 0;
+    left: 50%;
+    --glimbo-rest-x: -50%;
+    --glimbo-rest-y: 100%;
+    --glimbo-peek-x: -50%;
+    --glimbo-peek-y: 25%;
+}
+
+    .glimbo-wrap.anchor-bottom .glimbo-img {
+        left: 50%;
+        bottom: 18px;
+        transform: translateX(-50%) rotate(-20deg);
+    }
+
+/* =========================================
+   CORNERS
+========================================= */
+
+.glimbo-wrap.anchor-top-left {
+    left: 0;
+    top: 0;
+    --glimbo-rest-x: -100%;
+    --glimbo-rest-y: -100%;
+    --glimbo-peek-x: -25%;
+    --glimbo-peek-y: -25%;
+}
+
+    .glimbo-wrap.anchor-top-left .glimbo-img {
+        left: 18px;
+        top: 18px;
+        transform: rotate(118deg);
+    }
+
+.glimbo-wrap.anchor-top-right {
+    right: 0;
+    top: 0;
+    --glimbo-rest-x: 100%;
+    --glimbo-rest-y: -100%;
+    --glimbo-peek-x: 25%;
+    --glimbo-peek-y: -25%;
+}
+
+    .glimbo-wrap.anchor-top-right .glimbo-img {
+        right: 18px;
+        top: 18px;
+        transform: scaleX(-1) rotate(-242deg);
+    }
+
+.glimbo-wrap.anchor-bottom-left {
+    left: 0;
+    bottom: 0;
+    --glimbo-rest-x: -100%;
+    --glimbo-rest-y: 100%;
+    --glimbo-peek-x: -25%;
+    --glimbo-peek-y: 25%;
+}
+
+    .glimbo-wrap.anchor-bottom-left .glimbo-img {
+        left: 18px;
+        bottom: 18px;
+        transform: rotate(28deg);
+    }
+
+.glimbo-wrap.anchor-bottom-right {
+    right: 0;
+    bottom: 0;
+    --glimbo-rest-x: 100%;
+    --glimbo-rest-y: 100%;
+    --glimbo-peek-x: 25%;
+    --glimbo-peek-y: 25%;
+}
+
+    .glimbo-wrap.anchor-bottom-right .glimbo-img {
+        right: 18px;
+        bottom: 18px;
+        transform: scaleX(-1) rotate(28deg);
+    }
+
+/* =========================================
+   KEYFRAMES
+========================================= */
+
+@keyframes glimbo-peek {
     from {
-        transform: translateX(100%);
+        transform: translate(var(--glimbo-rest-x), var(--glimbo-rest-y));
     }
 
     to {
-        transform: translateX(25%);
+        transform: translate(var(--glimbo-peek-x), var(--glimbo-peek-y));
     }
 }
 
-@keyframes retreat-right {
+@keyframes glimbo-retreat {
     from {
-        transform: translateX(25%);
+        transform: translate(var(--glimbo-peek-x), var(--glimbo-peek-y));
     }
 
     to {
-        transform: translateX(100%);
+        transform: translate(var(--glimbo-rest-x), var(--glimbo-rest-y));
     }
 }
 
-@keyframes slide-left {
-    from {
-        transform: translateX(-100%);
+@keyframes glimbo-bob {
+    0%, 100% {
+        translate: 0 0;
     }
 
-    to {
-        transform: translateX(-25%);
-    }
-}
-
-@keyframes retreat-left {
-    from {
-        transform: translateX(-25%);
-    }
-
-    to {
-        transform: translateX(-100%);
+    50% {
+        translate: 0 -5px;
     }
 }
 
