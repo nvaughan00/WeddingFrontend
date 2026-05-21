@@ -1,103 +1,269 @@
 @implements IDisposable
-@using System.Linq
 
-<div class="glimbo-wrap @AnchorClass @_state" aria-hidden="true">
-    <img src="@ImageSrc" class="glimbo-img" alt="Glimbo" />
-</div>
+@foreach (var glimbo in ActiveGlimbos)
+{
+    <div @key="glimbo"
+         class="glimbo-wrap"
+         style="@glimbo.PositionStyle">
+
+        <div class="glimbo-sprite"
+             style="@glimbo.TransformStyle">
+
+            <img class="glimbo-img"
+                 style="@glimbo.RotationStyle"
+                 src="images/glimbo.png"
+                 alt="Glimbo" />
+
+        </div>
+
+    </div>
+}
 
 @code {
-    public enum GlimboPeekAnchor
+
+    private readonly Random _random = new();
+
+    private Timer? _timer;
+
+    private bool _frenzyMode;
+    private bool _hunterMode;
+    private bool _swarmMode;
+    private GlimboDirection? _swarmDirection;
+
+    private int AppearanceFrequencyMs = 10000;
+    private double _hunterProgress = 50;
+
+    private readonly List<GlimboInstance> ActiveGlimbos = [];
+
+    protected override void OnInitialized()
+    {
+        _timer = new Timer(
+            async _ => await InvokeAsync(SpawnGlimbo),
+            null,
+            1000,
+            AppearanceFrequencyMs);
+    }
+
+    private enum GlimboDirection
     {
         Left,
         Right,
+
         Top,
         Bottom,
+
         TopLeft,
         TopRight,
+
         BottomLeft,
         BottomRight
     }
 
-    [Parameter] public string ImageSrc { get; set; } = "/images/glimbo.png";
-    [Parameter] public int CheckIntervalMs { get; set; } = 8000;
-    [Parameter] public double AppearChance { get; set; } = 0.95;
-    [Parameter] public int PeekDurationMs { get; set; } = 4000;
-    [Parameter] public IReadOnlyCollection<GlimboPeekAnchor>? AllowedAnchors { get; set; }
-
-    private static readonly GlimboPeekAnchor[] DefaultAnchors =
-        Enum.GetValues<GlimboPeekAnchor>();
-
-    private readonly Random _rng = new();
-    private CancellationTokenSource? _cts;
-    private string _state = "idle";
-    private GlimboPeekAnchor _anchor = GlimboPeekAnchor.Right;
-
-    protected override void OnInitialized()
+    private sealed class GlimboInstance
     {
-        _cts = new CancellationTokenSource();
-        _ = RunLoopAsync(_cts.Token);
+        public string PositionStyle { get; set; } = "";
+
+        public string TransformStyle { get; set; } = "";
+
+        public string RotationStyle { get; set; } = "";
     }
 
-    private async Task RunLoopAsync(CancellationToken token)
+    private void UpdateTimer()
     {
+        _timer?.Change(1000, AppearanceFrequencyMs);
+    }
+
+    private async Task SpawnGlimbo()
+    {
+        var count = _frenzyMode
+            ? _random.Next(3, 9)
+            : 1;
+
+        var tasks = new List<Task>();
+
+        for (int i = 0; i < count; i++)
+        {
+            tasks.Add(SpawnSingleGlimbo());
+        }
+
+        await Task.WhenAll(tasks);
+    }
+
+    private (string position, string rotation, string hidden, string visible) BuildDirection(GlimboDirection direction)
+    {
+        var x = _random.Next(10, 90);
+        var y = _random.Next(10, 85);
+
+        return direction switch
+        {
+            GlimboDirection.Left =>
+            (
+                $"left:0; top:{y}%;",
+
+                "right:18px; top:18px; transform:rotate(72deg);",
+
+                "transform:translate3d(-185px,0,0);",
+
+                "transform:translate3d(-85px,0,0);"
+            ),
+
+            GlimboDirection.Right =>
+            (
+                $"right:0; top:{y}%;",
+
+                "left:18px; top:18px; transform:scaleX(-1) rotate(-290deg);",
+
+                "transform:translate3d(185px,0,0);",
+
+                "transform:translate3d(85px,0,0);"
+            ),
+
+            GlimboDirection.Top =>
+            (
+                $"top:0; left:{x}%;",
+
+                "left:20px; bottom:10px; transform:rotate(180deg);",
+
+                "transform:translate3d(0,-185px,0);",
+
+                "transform:translate3d(0,-85px,0);"
+            ),
+
+            GlimboDirection.Bottom =>
+            (
+                $"bottom:0; left:{x}%;",
+
+                "left:20px; top:10px; transform:rotate(0deg);",
+
+                "transform:translate3d(0,185px,0);",
+
+                "transform:translate3d(0,85px,0);"
+            ),
+
+            GlimboDirection.TopLeft =>
+            (
+                "top:0; left:0;",
+
+                "right:18px; bottom:18px; transform:rotate(140deg);",
+
+                "transform:translate3d(-185px,-185px,0);",
+
+                "transform:translate3d(-85px,-85px,0);"
+            ),
+
+            GlimboDirection.TopRight =>
+            (
+                "top:0; right:0;",
+
+                "left:18px; bottom:18px; transform:scaleX(-1) rotate(-210deg);",
+
+                "transform:translate3d(185px,-185px,0);",
+
+                "transform:translate3d(85px,-85px,0);"
+            ),
+
+            GlimboDirection.BottomLeft =>
+            (
+                "bottom:0; left:0;",
+
+                "right:18px; top:18px; transform:rotate(40deg);",
+
+                "transform:translate3d(-185px,185px,0);",
+
+                "transform:translate3d(-85px,85px,0);"
+            ),
+
+            _ =>
+            (
+                "bottom:0; right:0;",
+
+                "right:18px; bottom:18px; transform:scaleX(-1) rotate(28deg);",
+
+                "transform:translate3d(185px,185px,0);",
+
+                "transform:translate3d(85px,85px,0);"
+            )
+        };
+    }
+
+    private async Task SpawnSingleGlimbo()
+    {
+        var direction =
+            (GlimboDirection)_random.Next(8);
+
+        var data = BuildDirection(direction);
+
+        var glimbo = new GlimboInstance
+        {
+            PositionStyle = data.position,
+
+            RotationStyle = data.rotation,
+
+            TransformStyle =
+                $"{data.hidden}; transition: transform .8s cubic-bezier(.22,1.2,.36,1);"
+        };
+
+        await InvokeAsync(() =>
+        {
+            ActiveGlimbos.Add(glimbo);
+            StateHasChanged();
+        });
+
+        await Task.Delay(25);
+
+        await InvokeAsync(() =>
+        {
+            glimbo.TransformStyle =
+                $"{data.visible}; transition: transform 1.4s cubic-bezier(.22,1.2,.36,1);";
+
+            StateHasChanged();
+        });
+
+        await Task.Delay(_random.Next(1800, 3200));
+
+        await InvokeAsync(() =>
+        {
+            glimbo.TransformStyle =
+                $"{data.hidden}; transition: transform .9s ease-in;";
+
+            StateHasChanged();
+        });
+
+        await Task.Delay(1050);
+
+        await InvokeAsync(() =>
+        {
+            ActiveGlimbos.Remove(glimbo);
+            StateHasChanged();
+        });
+    }
+
+    private async Task ActivateFrenzy()
+    {
+        if (_frenzyMode)
+            return;
+
+        _frenzyMode = true;
+
         try
         {
-            while (!token.IsCancellationRequested)
+            for (int i = 0; i < 14; i++)
             {
-                await Task.Delay(Math.Max(0, CheckIntervalMs), token);
+                _ = SpawnGlimbo();
 
-                if (token.IsCancellationRequested || _state != "idle")
-                {
-                    continue;
-                }
-
-                if (_rng.NextDouble() >= AppearChance)
-                {
-                    continue;
-                }
-
-                _anchor = PickAnchor();
-                _state = "peeking";
-                await InvokeAsync(StateHasChanged);
-
-                await Task.Delay(Math.Max(0, PeekDurationMs), token);
-
-                _state = "retreating";
-                await InvokeAsync(StateHasChanged);
-
-                await Task.Delay(650, token);
-
-                _state = "idle";
-                await InvokeAsync(StateHasChanged);
+                await Task.Delay(180);
             }
+
+            await Task.Delay(6000);
         }
-        catch (TaskCanceledException)
+        finally
         {
+            _frenzyMode = false;
         }
     }
-
-    private GlimboPeekAnchor PickAnchor()
-    {
-        var anchors = (AllowedAnchors is { Count: > 0 } ? AllowedAnchors : DefaultAnchors).ToArray();
-        return anchors[_rng.Next(anchors.Length)];
-    }
-
-    private string AnchorClass => _anchor switch
-    {
-        GlimboPeekAnchor.Left => "anchor-left",
-        GlimboPeekAnchor.Right => "anchor-right",
-        GlimboPeekAnchor.Top => "anchor-top",
-        GlimboPeekAnchor.Bottom => "anchor-bottom",
-        GlimboPeekAnchor.TopLeft => "anchor-top-left",
-        GlimboPeekAnchor.TopRight => "anchor-top-right",
-        GlimboPeekAnchor.BottomLeft => "anchor-bottom-left",
-        GlimboPeekAnchor.BottomRight => "anchor-bottom-right",
-        _ => "anchor-right"
-    };
 
     public void Dispose()
     {
-        _cts?.Cancel();
-        _cts?.Dispose();
+        _timer?.Dispose();
     }
 }
