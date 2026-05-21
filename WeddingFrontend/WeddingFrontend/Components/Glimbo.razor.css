@@ -7,8 +7,8 @@
     bottom: 12%;
     z-index: 9999;
     pointer-events: none;
-    width: 340px;
-    height: 240px;
+    width: 255px;
+    height: 200px;
     overflow: visible;
 }
 
@@ -39,24 +39,12 @@
 }
 
 /* =========================================
-   NECK
-========================================= */
-
-.glimbo-neck {
-    position: absolute;
-    width: 0;
-    height: 40px;
-    z-index: 1;
-    background: linear-gradient(180deg, rgb(106,148,48), rgb(154,190,84));
-}
-
-/* =========================================
    RIGHT SIDE
 ========================================= */
 
 .glimbo-wrap.right {
     right: 0;
-    transform: translateX(100%);
+    transform: translateX(40%);
 }
 
     /* HEAD */
@@ -82,25 +70,16 @@
 
 .glimbo-wrap.left {
     left: 0;
-    transform: translateX(-100%);
+    transform: translateX(-1%);
 }
 
-    /* HEAD */
-    .glimbo-wrap.left .glimbo-img {
-        right: 18px;
-        top: 18px;
-        transform: rotate(72deg);
-        transform-origin: center center;
-    }
-
-    /* NECK — grows from left wall rightward toward head */
-    .glimbo-wrap.left .glimbo-neck {
-        left: -10px;
-        top: 128px;
-        transform: rotate(0deg);
-        transform-origin: left center;
-        border-radius: 0 18px 18px 0;
-    }
+/* HEAD */
+.glimbo-wrap.left .glimbo-img {
+    right: 18px;
+    top: 18px;
+    transform: rotate(72deg);
+    transform-origin: center center;
+}
 
 /* =========================================
    PEEKING / RETREATING
@@ -120,14 +99,6 @@
 
 .glimbo-wrap.left.retreating {
     animation: retreat-left .7s ease-in forwards;
-}
-
-.glimbo-wrap.peeking .glimbo-neck {
-    animation: neck-grow 1.6s cubic-bezier(.22,1.2,.36,1) forwards, neck-pulse 1.8s ease-in-out infinite;
-}
-
-.glimbo-wrap.retreating .glimbo-neck {
-    animation: neck-shrink .7s ease-in forwards;
 }
 
 /* =========================================
@@ -171,32 +142,6 @@
 
     to {
         transform: translateX(-100%);
-    }
-}
-
-/* =========================================
-   NECK KEYFRAMES
-   200px — long enough to bridge the gap and
-   tuck behind the head. Tune if needed.
-========================================= */
-
-@keyframes neck-grow {
-    from {
-        width: 0;
-    }
-
-    to {
-        width: 200px;
-    }
-}
-
-@keyframes neck-shrink {
-    from {
-        width: 200px;
-    }
-
-    to {
-        width: 0;
     }
 }
 
