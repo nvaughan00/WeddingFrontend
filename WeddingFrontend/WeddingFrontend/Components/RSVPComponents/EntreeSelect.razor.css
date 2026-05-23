@@ -18,6 +18,7 @@
     font-size: 1.3rem;
     font-weight: 600;
     letter-spacing: 0.12em;
+    line-height: 10px;
     color: #7a5c3a;
     text-align: center;
     margin: 0;
@@ -29,6 +30,10 @@
     gap: 16px;
     justify-content: center;
     width: 100%;
+}
+
+.desert-margin {
+    margin-top: 50px;
 }
 
 .entree-option {

@@ -8,5 +8,6 @@
         public string Entree { get; set; } = string.Empty;
         public string HouseholdName { get; set; } = string.Empty;
         public bool IsChild { get; set; }
+        public string Desert { get; set; } = string.Empty;
     }
 }

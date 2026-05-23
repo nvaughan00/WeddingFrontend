@@ -35,8 +35,26 @@
             }
         </div>
     }
+</div>
+<div class="entree-card @(!Enabled ? "entree-disabled" : "") desert-margin">
+        <p class="entree-guest-name">- Select A Desert For -</p>
+        <p class="entree-guest-name">@Guest.Name</p>
+        <div class="entree-options">
+            @foreach (var option in Deserts)
+            {
+                <div class="entree-option @(SelectedDesert == option.Name ? "selected" : "") @(justSelectedDesert == option.Name ? "entree-just-selected-active" : "") @(!Enabled ? "entree-option-disabled" : "")"
+                     @onclick="() => { if (Enabled) SelectDesert(option.Name); }">
+                    <div class="entree-image-wrap">
+                        <img class="entree-image" src="images/@(option.Name.ToLower()).jpg" alt="@option" />
+                    </div>
+                    <p class="entree-label">@option.Name</p>
+                    <p class="entree-label"><i>@option.Description</i></p>
+                </div>
+            }
+        </div>
+    
 
-    @if (!string.IsNullOrEmpty(SelectedEntree) && Enabled)
+    @if (!string.IsNullOrEmpty(SelectedEntree) && !string.IsNullOrEmpty(SelectedDesert) && Enabled)
     {
         <div class="submit-wrap">
             <button class="submit-btn" @onclick="Submit">Confirm @Guest.Name's Entree</button>
@@ -49,15 +67,19 @@
     }
 </div>
 
+
 @code {
     [Parameter] public Guest Guest { get; set; } = new();
-    [Parameter] public EventCallback<(Guest, string)> OnEntreeSelected { get; set; }
+    [Parameter] public EventCallback<(Guest, string, string)> OnEntreeSelected { get; set; }
     [Parameter] public bool Enabled { get; set; }
 
     private string SelectedEntree { get; set; } = string.Empty;
+    private string SelectedDesert { get; set; } = string.Empty;
     private string? justSelectedEntree = null;
+    private string? justSelectedDesert = null;
     private List<Entree> Entrees = new List<Entree>();
     private List<Entree> ChildEntrees = new List<Entree>();
+    private List<Entree> Deserts = new List<Entree>();
     private bool showSaved = false;
 
     public record Entree(string Name, string Description);
@@ -76,6 +98,12 @@
             new("Chicken Tenders", "Broaster Chicken Tenders served with Fries"),
         };
 
+        Deserts = new List<Entree>()
+        {
+            new("Torta De Banana", "Banana Cake Layered with Whipped Cream Cheese Frosting Served with Creme Anglaise & Our Home-Made Raspberry Sauce"),
+            new("Torte De Chocolate", "Dark Chocolate Mousse Cake with Cream Anglaise & Argentinean Dulce de Leche" )
+        };
+
         base.OnInitialized();
     }
 
@@ -92,13 +120,22 @@
         justSelectedEntree = entree;
     }
 
+    private void SelectDesert(string desert)
+    {
+        if (!Enabled) return;
+        SelectedDesert = desert;
+        justSelectedDesert = desert;
+    }
+
     private async Task Submit()
     {
         if (string.IsNullOrEmpty(SelectedEntree)) return;
         showSaved = true;
         justSelectedEntree = null;
-        await OnEntreeSelected.InvokeAsync((Guest, SelectedEntree));
-        SelectedEntree = null;
+        justSelectedDesert = null;
+        await OnEntreeSelected.InvokeAsync((Guest, SelectedEntree, SelectedDesert));
+        SelectedEntree = string.Empty;
+        SelectedDesert = string.Empty;
 
         await Task.Delay(2000);
         showSaved = false;

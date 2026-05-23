@@ -33,7 +33,7 @@
 
     private bool AllEntreesSelected { get; set; } = false;
 
-    private async Task GetSelectedEntree((Guest guest, string entree) selection)
+    private async Task GetSelectedEntree((Guest guest, string entree, string desert) selection)
     {
         var index = FamilyMembers.FindIndex(x => x.Id == selection.guest.Id);
 
@@ -48,6 +48,7 @@
         using var db = DbFactory.CreateDbContext();
         var guestToUpdate = db.Guests.First(x => x.Name == selection.guest.Name && x.HouseholdName == selection.guest.HouseholdName);
         guestToUpdate.Entree = selection.entree;
+        guestToUpdate.Desert = selection.desert;
         db.Guests.Update(guestToUpdate);
         await db.SaveChangesAsync();
 
