@@ -45,6 +45,7 @@
         {
             AllEntreesSelected = true;
         }
+
         using var db = DbFactory.CreateDbContext();
         var guestToUpdate = db.Guests.First(x => x.Name == selection.guest.Name && x.HouseholdName == selection.guest.HouseholdName);
         guestToUpdate.Entree = selection.entree;

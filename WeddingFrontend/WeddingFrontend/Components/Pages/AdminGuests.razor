@@ -30,6 +30,7 @@
                         <th @onclick='() => Sort("HouseholdName")'>Household @SortIcon("HouseholdName")</th>
                         <th @onclick='() => Sort("IsAttending")'>Attending @SortIcon("IsAttending")</th>
                         <th @onclick='() => Sort("Entree")'>     Entrée @SortIcon("Entree")</th>
+                        <th @onclick='() => Sort("Desert")'>     Desert @SortIcon("Desert")</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,6 +46,7 @@
                                 </span>
                             </td>
                             <td>@(string.IsNullOrEmpty(guest.Entree) ? "—" : guest.Entree)</td>
+                            <td>@(string.IsNullOrEmpty(guest.Desert) ? "—" : guest.Desert)</td>
                         </tr>
                     }
                 </tbody>
@@ -85,6 +87,7 @@
             "HouseholdName" => sortAscending ? guests.OrderBy(x => x.HouseholdName) : guests.OrderByDescending(x => x.HouseholdName),
             "IsAttending"   => sortAscending ? guests.OrderBy(x => x.IsAttending)   : guests.OrderByDescending(x => x.IsAttending),
             "Entree"        => sortAscending ? guests.OrderBy(x => x.Entree)        : guests.OrderByDescending(x => x.Entree),
+            "Desert"        => sortAscending ? guests.OrderBy(x => x.Desert)        : guests.OrderByDescending(x => x.Desert),
             _               => guests
         };
     }

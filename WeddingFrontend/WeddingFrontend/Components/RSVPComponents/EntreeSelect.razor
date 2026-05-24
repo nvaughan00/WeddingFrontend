@@ -57,7 +57,7 @@
     @if (!string.IsNullOrEmpty(SelectedEntree) && !string.IsNullOrEmpty(SelectedDesert) && Enabled)
     {
         <div class="submit-wrap">
-            <button class="submit-btn" @onclick="Submit">Confirm @Guest.Name's Entree</button>
+            <button class="submit-btn" @onclick="Submit">Confirm @Guest.Name's Meal</button>
         </div>
     }
 
@@ -111,6 +111,9 @@
     {
         if (!string.IsNullOrEmpty(Guest.Entree))
             SelectedEntree = Guest.Entree;
+
+        if (!string.IsNullOrEmpty(Guest.Desert))
+            SelectedDesert = Guest.Desert;
     }
 
     private void SelectEntree(string entree)
