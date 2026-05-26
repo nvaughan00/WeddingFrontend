@@ -1,4 +1,7 @@
 ﻿@page "/weddingparty"
+@using WeddingFrontend.Services
+
+@inject GlimboService GlimboService
 
 <div class="wp-page">
     <h1 class="wp-title">Wedding Party</h1>
@@ -10,7 +13,7 @@
             <div class="wp-list">
                 @foreach (var person in groomsmen)
                 {
-                    <div class="wp-card" @onclick="() => OnCardClick(person)">
+                    <div class="wp-card">
                         <div class="wp-img-wrap">
                             <img src="@person.ImagePath" alt="@person.Name" class="wp-img" />
                         </div>
@@ -29,7 +32,7 @@
             <div class="wp-list">
                 @foreach (var person in bridesmaids)
                 {
-                    <div class="wp-card" @onclick="() => OnCardClick(person)">
+                    <div class="wp-card">
                         <div class="wp-img-wrap">
                             <img src="@person.ImagePath" alt="@person.Name" class="wp-img" />
                         </div>
@@ -49,7 +52,7 @@
         <div class="wp-mentions-list">
             @foreach (var mention in specialMentions)
             {
-                <div class="wp-mention">
+                <div class="wp-mention" @onclick="() => OnCardClick(mention)">
                     <div class="wp-mention-img-wrap">
                         <img src="@mention.ImagePath" alt="@mention.Name" class="wp-mention-img" />
                     </div>
@@ -62,35 +65,40 @@
 </div>
 
 @code {
-    private void OnCardClick(WeddingPartyMember person)
+
+
+    private async Task OnCardClick(SpecialMention person)
     {
-        Console.WriteLine($"Clicked: {person.Name}");
+        if (person.Name == "Glimbo")
+        {
+            GlimboService.Trigger(true);
+        }
     }
 
     private List<WeddingPartyMember> groomsmen = new()
     {
-        new("Steven 'The Hog' McCormick", "Best Man", "Once lost in the championship round of a national Muay Thai torunament.", "images/test.jpg"),
+        new("Steven 'The Hog' McCormick", "Best Man", "Once lost in the championship round of a national Muay Thai torunament.", "images/steve.png"),
         new("Ben Vaughan", "Groomsman", "Left the material plane to become a psychic tree. He's just back for vacation", "images/test.jpg"),
-        new("Aidan Vaughan", "Groomsman", "Thinks he's stronger than David. They're going to arm wrestle at the wedding.", "images/test.jpg"),
-        new("David 'The Drink' Breese", "Groomsman", "Can definitely hit a front lever. Ask him about it.", "images/test.jpg"),
+        new("Aidan Vaughan", "Groomsman", "Thinks he's stronger than David. They're going to arm wrestle at the wedding.", "images/aidan.png"),
+        new("David 'The Drink' Breese", "Groomsman", "Can definitely hit a front lever. Ask him about it.", "images/david.png"),
         new("Max Frost", "Groomsman", "Better known for his hit poem, The Road Taken", "images/test.jpg"),
-        new("Parker Day", "Groomsman", "He might come to the wedding?", "images/test.jpg"),
+        new("Parker Day", "Groomsman", "Once drove through a mid-construction road, just because he could.", "images/parker.png"),
     };
 
     private List<WeddingPartyMember> bridesmaids = new()
     {
-        new("Emily Ganson", "Matron of Honor", "Sarah has been Whitney's ride-or-die since high school. She planned the most epic bachelorette trip imaginable.", "images/test.jpg"),
-        new("Jordan Tomlin", "Bridesmaid", "Emma and Whitney bonded over their shared obsession with reality TV and have never looked back.", "images/test.jpg"),
-        new("Hannah Wilder", "Bridesmaid", "Rachel is the most organized person Whitney knows — she had a spreadsheet for bridesmaid dress shopping.", "images/test.jpg"),
-        new("Maddie Dusselier", "Bridesmaid", "Anna brings the energy to every room. She is also responsible for introducing Nick and Whitney.", "images/maddie.png"),
-        new("Ashely Cave", "Bridesmaid", "Anna brings the energy to every room. She is also responsible for introducing Nick and Whitney.", "images/ashley.png"),
-        new("Kelsey Edwards", "Bridesmaid", "Anna brings the energy to every room. She is also responsible for introducing Nick and Whitney.", "images/test.jpg"),
+        new("Emily Ganson", "Matron of Honor", "placeholder", "images/test.jpg"),
+        new("Jordan Tomlin", "Bridesmaid", "placeholder", "images/jordan.png"),
+        new("Hannah Wilder", "Bridesmaid", "placeholder", "images/hannah.png"),
+        new("Maddie Dusselier", "Bridesmaid", "placeholder", "images/maddie.png"),
+        new("Ashley Cave", "Bridesmaid", "placeholder", "images/ashley.png"),
+        new("Kelsey Edwards", "Bridesmaid", "placeholder", "images/test.jpg"),
     };
 
     private List<SpecialMention> specialMentions = new()
     {
-        new("Sue Edwards", "blank", "images/test.jpg"),
-        new("Kevin & Anne Marie Vaughan", "blank", "images/test.jpg"),
+        new("Susan Edwards", "placeholder", "images/test.jpg"),
+        new("Kevin & Anne Marie Vaughan", "placeholder", "images/test.jpg"),
         new("Meepo", "For his endless nights of yowling & waking up the baby.", "images/test.jpg"),
         new("Glimbo", "Protector of us all. King to many.", "images/glimbo2.png")
     };

@@ -221,3 +221,23 @@ window.scrollToElement = (id) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
+
+window.playGlimbo = function (isFrenzy) {
+    const now = Date.now();
+    const delay = convertRange(Math.random(), [0, 1], [300, 700]);
+    const cooldown = isFrenzy ? delay : 0;
+
+    if (window._glimboLastPlayed && (now - window._glimboLastPlayed) < cooldown) {
+        return;
+    }
+
+    window._glimboLastPlayed = now;
+    const audio = new Audio('sounds/glimbo2.mp3');
+    audio.volume = isFrenzy ? 0.05 : 0.1; 
+    audio.play();
+    window._hellYeahAudio = audio;
+}
+
+function convertRange(value, r1, r2) {
+    return (value - r1[0]) * (r2[1] - r2[0]) / (r1[1] - r1[0]) + r2[0];
+}

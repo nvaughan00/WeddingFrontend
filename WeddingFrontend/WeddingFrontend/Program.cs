@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using WeddingFrontend.Components;
 using WeddingFrontend.Context;
+using WeddingFrontend.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,8 @@ var dbPath = builder.Environment.IsDevelopment()
 
 builder.Services.AddDbContextFactory<AppDbContext>(options =>
     options.UseSqlite($"Data Source={dbPath}"));
+
+builder.Services.AddScoped<GlimboService>();
 
 var app = builder.Build();
 

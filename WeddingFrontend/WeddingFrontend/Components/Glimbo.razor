@@ -1,4 +1,8 @@
+@using WeddingFrontend.Services
+
 @implements IDisposable
+@inject GlimboService GlimboService
+@inject IJSRuntime JS
 
 @foreach (var glimbo in ActiveGlimbos)
 {
@@ -13,22 +17,16 @@
                  style="@glimbo.RotationStyle"
                  src="images/glimbo.png"
                  alt="Glimbo" />
-
         </div>
-
     </div>
 }
 
 @code {
 
     private readonly Random _random = new();
-
     private Timer? _timer;
-
     private bool _frenzyMode;
-
     private int AppearanceFrequencyMs = 30000;
-
     private readonly List<GlimboInstance> ActiveGlimbos = [];
 
     protected override void OnInitialized()
@@ -36,8 +34,19 @@
         _timer = new Timer(
             async _ => await InvokeAsync(SpawnGlimbo),
             null,
-            1000,
+            10000,
             AppearanceFrequencyMs);
+
+        GlimboService.OnTrigger += HandleTrigger;
+    }
+
+    private async void HandleTrigger(bool value)
+    {
+        if(value)
+        {
+            await ActivateFrenzy();
+        }
+        await InvokeAsync(StateHasChanged);
     }
 
     private enum GlimboDirection
@@ -71,9 +80,7 @@
 
     private async Task SpawnGlimbo()
     {
-        var count = _frenzyMode
-            ? _random.Next(3, 9)
-            : 1;
+        var count = _frenzyMode ? _random.Next(3, 20) : 1;
 
         var tasks = new List<Task>();
 
@@ -184,8 +191,7 @@
 
     private async Task SpawnSingleGlimbo()
     {
-        var direction =
-            (GlimboDirection)_random.Next(8);
+        var direction = (GlimboDirection) _random.Next(8);
 
         var data = BuildDirection(direction);
 
@@ -195,8 +201,7 @@
 
             RotationStyle = data.rotation,
 
-            TransformStyle =
-                $"{data.hidden}; transition: transform .8s cubic-bezier(.22,1.2,.36,1);"
+            TransformStyle = $"{data.hidden}; transition: transform .8s cubic-bezier(.22,1.2,.36,1);"
         };
 
         await InvokeAsync(() =>
@@ -209,21 +214,22 @@
 
         await InvokeAsync(() =>
         {
-            glimbo.TransformStyle =
-                $"{data.visible}; transition: transform 1.4s cubic-bezier(.22,1.2,.36,1);";
+            glimbo.TransformStyle = $"{data.visible}; transition: transform 1.4s cubic-bezier(.22,1.2,.36,1);";
 
             StateHasChanged();
         });
+
+        await JS.InvokeVoidAsync("playGlimbo", _frenzyMode);
 
         await Task.Delay(_random.Next(1800, 3200));
 
         await InvokeAsync(() =>
         {
-            glimbo.TransformStyle =
-                $"{data.hidden}; transition: transform .9s ease-in;";
+            glimbo.TransformStyle = $"{data.hidden}; transition: transform .9s ease-in;";
 
             StateHasChanged();
         });
+
 
         await Task.Delay(2000);
 
@@ -260,6 +266,7 @@
 
     public void Dispose()
     {
+        GlimboService.OnTrigger -= HandleTrigger;
         _timer?.Dispose();
     }
 }
