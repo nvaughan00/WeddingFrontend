@@ -15,16 +15,17 @@
     font-size: 3rem;
     font-weight: 600;
     letter-spacing: 0.2em;
-    color: #7a5c3a;
+    color: #d4af37;
     text-align: center;
     margin: 0;
+    text-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
 }
 
 .registry-subtitle {
     font-family: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
     font-size: 1.1rem;
     letter-spacing: 0.07em;
-    color: #a08060;
+    color: #a89a7d;
     text-align: center;
     line-height: 1.8;
     margin: 0;
@@ -32,11 +33,12 @@
 
 .registry-card {
     width: 100%;
-    background: rgba(255, 252, 248, 0.92);
-    border: 1px solid rgba(180, 155, 120, 0.35);
+    background: rgba(45, 55, 50, 0.7);
+    border: 4px solid;
+    border-image: url('/images/cobblestone.svg') 10 repeat;
     border-radius: 20px;
     padding: 40px 32px;
-    box-shadow: 0 2px 20px rgba(100, 70, 40, 0.08);
+    box-shadow: 0 4px 24px rgba(30, 50, 40, 0.3);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -59,7 +61,7 @@
     font-family: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
     font-size: 1.05rem;
     letter-spacing: 0.06em;
-    color: #8a6848;
+    color: #c8bfa8;
     text-align: center;
     line-height: 1.75;
     margin: 0;
@@ -69,24 +71,24 @@
     font-family: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
     font-size: 1.05rem;
     letter-spacing: 0.12em;
-    color: #fffcf8;
-    background: #7a5c3a;
+    color: #0f1f15;
+    background: #d4af37;
     border: none;
     border-radius: 999px;
     padding: 14px 44px;
     cursor: pointer;
     text-decoration: none;
     transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-    box-shadow: 0 2px 12px rgba(100, 70, 40, 0.2);
+    box-shadow: 0 4px 16px rgba(212, 175, 55, 0.3);
     display: inline-block;
     margin-top: 4px;
 }
 
     .registry-btn:hover {
-        background: #9a7a50;
-        box-shadow: 0 4px 20px rgba(100, 70, 40, 0.28);
-        transform: translateY(-1px);
-        color: #fffcf8;
+        background: #e0d89f;
+        box-shadow: 0 6px 24px rgba(212, 175, 55, 0.4);
+        transform: translateY(-2px);
+        color: #0f1f15;
     }
 
     .registry-btn:active {
@@ -97,7 +99,7 @@
     font-family: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
     font-size: 0.95rem;
     letter-spacing: 0.07em;
-    color: #b0a080;
+    color: #a89a7d;
     text-align: center;
     font-style: italic;
     margin: 0;

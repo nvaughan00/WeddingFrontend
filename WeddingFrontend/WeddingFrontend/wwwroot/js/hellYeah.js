@@ -232,10 +232,31 @@ window.playGlimbo = function (isFrenzy) {
     }
 
     window._glimboLastPlayed = now;
-    const audio = new Audio('sounds/glimbo2.mp3');
+
+    // Initialize glimbo audio array if it doesn't exist
+    if (!window._glimboAudioInstances) {
+        window._glimboAudioInstances = [];
+    }
+
+    // Array of Glimbo sound options
+    const glimboSounds = ['sounds/glimbo.mp3', 'sounds/glimbo2.mp3', 'sounds/glimbo3.mp3', 'sounds/glimbo4.mp3'];
+    const randomSound = glimboSounds[Math.floor(Math.random() * glimboSounds.length)];
+
+    const audio = new Audio(randomSound);
     audio.volume = isFrenzy ? 0.05 : 0.1; 
+
+    // Add to array of playing sounds
+    window._glimboAudioInstances.push(audio);
+
+    // Clean up finished audio instances to prevent memory leaks
+    audio.addEventListener('ended', () => {
+        const index = window._glimboAudioInstances.indexOf(audio);
+        if (index > -1) {
+            window._glimboAudioInstances.splice(index, 1);
+        }
+    });
+
     audio.play();
-    window._hellYeahAudio = audio;
 }
 
 function convertRange(value, r1, r2) {

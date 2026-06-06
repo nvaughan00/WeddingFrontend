@@ -11,16 +11,17 @@
     font-size: 3rem;
     font-weight: 600;
     letter-spacing: 0.2em;
-    color: #7a5c3a;
+    color: #d4af37;
     text-align: center;
     margin-bottom: 8px;
+    text-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
 }
 
 .wp-subtitle {
     font-family: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
     font-size: 1.1rem;
     letter-spacing: 0.08em;
-    color: #a08060;
+    color: #a89a7d;
     text-align: center;
     margin-bottom: 56px;
 }
@@ -38,11 +39,11 @@
     font-size: 1.6rem;
     font-weight: 600;
     letter-spacing: 0.15em;
-    color: #7a5c3a;
+    color: #d4af37;
     text-align: center;
     margin-bottom: 24px;
     padding-bottom: 12px;
-    border-bottom: 1px solid rgba(180, 155, 120, 0.3);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
 }
 
 .wp-list {
@@ -56,12 +57,13 @@
     display: flex;
     gap: 16px;
     align-items: flex-start;
-    background: rgba(255, 252, 248, 0.92);
-    border: 1px solid rgba(180, 155, 120, 0.3);
+    background: rgba(45, 55, 50, 0.7);
+    border: 4px solid;
+    border-image: url('/images/cobblestone.svg') 8 repeat;
     border-radius: 14px;
     padding: 16px;
     transition: box-shadow 0.2s, border-color 0.2s, transform 0.15s;
-    box-shadow: 0 1px 8px rgba(100, 70, 40, 0.06);
+    box-shadow: 0 2px 12px rgba(30, 50, 40, 0.3);
 }
 
 .wp-img-wrap {
@@ -70,7 +72,7 @@
     border-radius: 50%;
     overflow: hidden;
     flex-shrink: 0;
-    border: 2px solid rgba(180, 155, 120, 0.35);
+    border: 2px solid rgba(212, 175, 55, 0.35);
 }
 
 .wp-img {
@@ -91,7 +93,7 @@
     font-size: 1.1rem;
     font-weight: 600;
     letter-spacing: 0.08em;
-    color: #7a5c3a;
+    color: #d4af37;
     margin: 0;
 }
 
@@ -99,7 +101,7 @@
     font-family: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
     font-size: 0.85rem;
     letter-spacing: 0.1em;
-    color: #b09070;
+    color: #a89a7d;
     margin: 0;
     text-transform: uppercase;
 }
@@ -108,14 +110,14 @@
     font-family: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
     font-size: 0.95rem;
     letter-spacing: 0.04em;
-    color: #8a6848;
+    color: #c8bfa8;
     line-height: 1.6;
     margin: 4px 0 0;
 }
 
 /* Special mentions */
 .wp-mentions-section {
-    border-top: 1px solid rgba(180, 155, 120, 0.25);
+    border-top: 1px solid rgba(212, 175, 55, 0.25);
     padding-top: 40px;
 }
 
@@ -127,16 +129,17 @@
 }
 
 .wp-mention {
-    background: rgba(255, 252, 248, 0.92);
-    border: 1px solid rgba(180, 155, 120, 0.3);
+    background: rgba(45, 55, 50, 0.7);
+    border: 4px solid;
+    border-image: url('/images/cobblestone.svg') 8 repeat;
     border-radius: 12px;
     padding: 18px 20px;
-    box-shadow: 0 1px 8px rgba(100, 70, 40, 0.05);
+    box-shadow: 0 2px 12px rgba(30, 50, 40, 0.3);
 }
 
 .wp-mention:hover {
-    border-color: rgba(122, 92, 58, 0.45);
-    box-shadow: 0 4px 20px rgba(100, 70, 40, 0.12);
+    border-image-source: url('/images/cobblestone.svg');
+    box-shadow: 0 4px 24px rgba(30, 50, 40, 0.4);
     transform: translateY(-2px);
     cursor: pointer;
 }
@@ -146,7 +149,7 @@
     font-size: 1.05rem;
     font-weight: 600;
     letter-spacing: 0.08em;
-    color: #7a5c3a;
+    color: #d4af37;
     margin: 0 0 6px;
 }
 
@@ -154,7 +157,7 @@
     font-family: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
     font-size: 0.92rem;
     letter-spacing: 0.04em;
-    color: #8a6848;
+    color: #c8bfa8;
     line-height: 1.6;
     margin: 0;
     font-style: italic;
@@ -189,7 +192,7 @@
     height: 80px;
     border-radius: 50%;
     overflow: hidden;
-    border: 2px solid rgba(180, 155, 120, 0.35);
+    border: 2px solid rgba(212, 175, 55, 0.35);
     margin-bottom: 12px;
     flex-shrink: 0;
 }

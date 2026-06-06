@@ -219,7 +219,8 @@
             StateHasChanged();
         });
 
-        await JS.InvokeVoidAsync("playGlimbo", _frenzyMode);
+        // Fire-and-forget the audio call so multiple glimbos can play sounds simultaneously
+        _ = JS.InvokeVoidAsync("playGlimbo", _frenzyMode);
 
         await Task.Delay(_random.Next(1800, 3200));
 

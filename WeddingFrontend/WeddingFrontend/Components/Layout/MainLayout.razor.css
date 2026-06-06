@@ -1,13 +1,14 @@
 #blazor-error-ui {
-    background: lightyellow;
+    background: #8b3a3a;
     bottom: 0;
-    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.5);
     display: none;
     left: 0;
     padding: 0.6rem 1.25rem 0.7rem 1.25rem;
     position: fixed;
     width: 100%;
     z-index: 1000;
+    color: #e0dcc8;
 }
 
 #blazor-error-ui .dismiss {
@@ -15,13 +16,16 @@
     position: absolute;
     right: 0.75rem;
     top: 0.5rem;
+    color: #e0dcc8;
 }
 
 .main-layout  {
     padding-top: 20vh;
+    position: relative;
+    z-index: 2;
 }
 
-@media (max-wdith: 600px) {
+@media (max-width: 600px) {
     .main-layout {
         padding-top: 2200px;
     }

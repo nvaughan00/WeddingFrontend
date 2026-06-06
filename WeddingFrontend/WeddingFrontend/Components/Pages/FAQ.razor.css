@@ -11,16 +11,17 @@
     font-size: 3rem;
     font-weight: 600;
     letter-spacing: 0.2em;
-    color: #7a5c3a;
+    color: #d4af37;
     text-align: center;
     margin-bottom: 8px;
+    text-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
 }
 
 .faq-subtitle {
     font-family: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
     font-size: 1.1rem;
     letter-spacing: 0.08em;
-    color: #a08060;
+    color: #a89a7d;
     text-align: center;
     margin-bottom: 48px;
 }
@@ -32,23 +33,24 @@
 }
 
 .faq-item {
-    background: rgba(255, 252, 248, 0.92);
-    border: 1px solid rgba(180, 155, 120, 0.3);
+    background: rgba(45, 55, 50, 0.7);
+    border: 4px solid;
+    border-image: url('/images/cobblestone.svg') 8 repeat;
     border-radius: 14px;
     padding: 20px 24px;
     cursor: pointer;
     transition: box-shadow 0.2s, border-color 0.2s;
-    box-shadow: 0 1px 8px rgba(100, 70, 40, 0.06);
+    box-shadow: 0 2px 12px rgba(30, 50, 40, 0.3);
 }
 
     .faq-item:hover {
-        border-color: rgba(180, 155, 120, 0.55);
-        box-shadow: 0 4px 18px rgba(100, 70, 40, 0.1);
+        border-image-source: url('/images/cobblestone.svg');
+        box-shadow: 0 4px 20px rgba(30, 50, 40, 0.4);
     }
 
     .faq-item.open {
-        border-color: rgba(122, 92, 58, 0.45);
-        box-shadow: 0 4px 20px rgba(100, 70, 40, 0.12);
+        border-image-source: url('/images/cobblestone.svg');
+        box-shadow: 0 4px 24px rgba(30, 50, 40, 0.5);
     }
 
 .faq-question {
@@ -60,14 +62,14 @@
     font-size: 1.1rem;
     font-weight: 600;
     letter-spacing: 0.07em;
-    color: #7a5c3a;
+    color: #d4af37;
 }
 
 .faq-arrow {
     width: 8px;
     height: 8px;
-    border-right: 1.5px solid #7a5c3a;
-    border-bottom: 1.5px solid #7a5c3a;
+    border-right: 1.5px solid #d4af37;
+    border-bottom: 1.5px solid #d4af37;
     transform: rotate(45deg);
     transition: transform 0.25s ease;
     flex-shrink: 0;
@@ -82,14 +84,14 @@
 .faq-answer {
     margin-top: 14px;
     padding-top: 14px;
-    border-top: 1px solid rgba(180, 155, 120, 0.2);
+    border-top: 1px solid rgba(212, 175, 55, 0.2);
 }
 
     .faq-answer p {
         font-family: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
         font-size: 1rem;
         letter-spacing: 0.05em;
-        color: #8a6848;
+        color: #c8bfa8;
         line-height: 1.7;
         margin: 0;
     }

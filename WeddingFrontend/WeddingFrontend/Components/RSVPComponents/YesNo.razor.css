@@ -10,16 +10,17 @@
     font-family: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
     font-size: 1.05rem;
     letter-spacing: 0.08em;
-    color: #a08060;
+    color: #a89a7d;
 }
 
 .yn-toggle {
     display: flex;
-    border: 1px solid rgba(180, 155, 120, 0.4);
+    border: 3px solid;
+    border-image: url('/images/cobblestone.svg') 6 repeat;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 2px 12px rgba(100, 70, 40, 0.08);
-    background: rgba(255, 252, 248, 0.92);
+    box-shadow: 0 2px 12px rgba(30, 50, 40, 0.2);
+    background: rgba(45, 55, 50, 0.7);
 }
 
 .yn-btn {
@@ -27,7 +28,7 @@
     font-family: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
     font-size: 1.05rem;
     letter-spacing: 0.1em;
-    color: #a08060;
+    color: #a89a7d;
     background: transparent;
     border: none;
     cursor: pointer;
@@ -35,17 +36,17 @@
 }
 
 .yn-btn:first-child {
-    border-right: 1px solid rgba(180, 155, 120, 0.3);
+    border-right: 1px solid rgba(212, 175, 55, 0.2);
 }
 
 .yn-btn:hover {
-    background: rgba(180, 140, 90, 0.08);
-    color: #7a5c3a;
+    background: rgba(212, 175, 55, 0.12);
+    color: #d4af37;
 }
 
 .yn-btn.selected {
-    background: rgba(180, 140, 90, 0.18);
-    color: #7a5c3a;
+    background: rgba(212, 175, 55, 0.25);
+    color: #d4af37;
     font-weight: 600;
 }
 

@@ -1,0 +1,89 @@
+<svg width="64" height="64" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+	<pattern id="bricks" x="0" y="0" width="64" height="64" patternUnits="userSpaceOnUse">
+	  <!-- Brick 1 -->
+	  <rect x="0" y="0" width="16" height="16" fill="#4a5568" stroke="#3a4652" stroke-width="1"/>
+	  <rect x="0" y="0" width="16" height="16" fill="url(#mossGradient1)" opacity="0.4"/>
+
+	  <!-- Brick 2 -->
+	  <rect x="16" y="0" width="16" height="16" fill="#4a5568" stroke="#3a4652" stroke-width="1"/>
+	  <rect x="16" y="0" width="16" height="16" fill="url(#mossGradient2)" opacity="0.35"/>
+
+	  <!-- Brick 3 -->
+	  <rect x="32" y="0" width="16" height="16" fill="#505060" stroke="#3a4652" stroke-width="1"/>
+	  <rect x="32" y="0" width="16" height="16" fill="url(#mossGradient3)" opacity="0.3"/>
+
+	  <!-- Brick 4 -->
+	  <rect x="48" y="0" width="16" height="16" fill="#4a5568" stroke="#3a4652" stroke-width="1"/>
+	  <rect x="48" y="0" width="16" height="16" fill="url(#mossGradient1)" opacity="0.4"/>
+
+	  <!-- Row 2 -->
+	  <!-- Brick 5 -->
+	  <rect x="0" y="16" width="16" height="16" fill="#505060" stroke="#3a4652" stroke-width="1"/>
+	  <rect x="0" y="16" width="16" height="16" fill="url(#mossGradient2)" opacity="0.35"/>
+
+	  <!-- Brick 6 -->
+	  <rect x="16" y="16" width="16" height="16" fill="#4a5568" stroke="#3a4652" stroke-width="1"/>
+	  <rect x="16" y="16" width="16" height="16" fill="url(#mossGradient3)" opacity="0.3"/>
+
+	  <!-- Brick 7 -->
+	  <rect x="32" y="16" width="16" height="16" fill="#4a5568" stroke="#3a4652" stroke-width="1"/>
+	  <rect x="32" y="16" width="16" height="16" fill="url(#mossGradient1)" opacity="0.4"/>
+
+	  <!-- Brick 8 -->
+	  <rect x="48" y="16" width="16" height="16" fill="#505060" stroke="#3a4652" stroke-width="1"/>
+	  <rect x="48" y="16" width="16" height="16" fill="url(#mossGradient2)" opacity="0.35"/>
+
+	  <!-- Row 3 -->
+	  <!-- Brick 9 -->
+	  <rect x="0" y="32" width="16" height="16" fill="#4a5568" stroke="#3a4652" stroke-width="1"/>
+	  <rect x="0" y="32" width="16" height="16" fill="url(#mossGradient3)" opacity="0.3"/>
+
+	  <!-- Brick 10 -->
+	  <rect x="16" y="32" width="16" height="16" fill="#505060" stroke="#3a4652" stroke-width="1"/>
+	  <rect x="16" y="32" width="16" height="16" fill="url(#mossGradient1)" opacity="0.4"/>
+
+	  <!-- Brick 11 -->
+	  <rect x="32" y="32" width="16" height="16" fill="#4a5568" stroke="#3a4652" stroke-width="1"/>
+	  <rect x="32" y="32" width="16" height="16" fill="url(#mossGradient2)" opacity="0.35"/>
+
+	  <!-- Brick 12 -->
+	  <rect x="48" y="32" width="16" height="16" fill="#4a5568" stroke="#3a4652" stroke-width="1"/>
+	  <rect x="48" y="32" width="16" height="16" fill="url(#mossGradient3)" opacity="0.3"/>
+
+	  <!-- Row 4 -->
+	  <!-- Brick 13 -->
+	  <rect x="0" y="48" width="16" height="16" fill="#505060" stroke="#3a4652" stroke-width="1"/>
+	  <rect x="0" y="48" width="16" height="16" fill="url(#mossGradient1)" opacity="0.4"/>
+
+	  <!-- Brick 14 -->
+	  <rect x="16" y="48" width="16" height="16" fill="#4a5568" stroke="#3a4652" stroke-width="1"/>
+	  <rect x="16" y="48" width="16" height="16" fill="url(#mossGradient2)" opacity="0.35"/>
+
+	  <!-- Brick 15 -->
+	  <rect x="32" y="48" width="16" height="16" fill="#4a5568" stroke="#3a4652" stroke-width="1"/>
+	  <rect x="32" y="48" width="16" height="16" fill="url(#mossGradient3)" opacity="0.3"/>
+
+	  <!-- Brick 16 -->
+	  <rect x="48" y="48" width="16" height="16" fill="#505060" stroke="#3a4652" stroke-width="1"/>
+	  <rect x="48" y="48" width="16" height="16" fill="url(#mossGradient1)" opacity="0.4"/>
+	</pattern>
+
+	<linearGradient id="mossGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+	  <stop offset="0%" style="stop-color:#6b8e6b;stop-opacity:0.5" />
+	  <stop offset="100%" style="stop-color:#5a7d5a;stop-opacity:0.3" />
+	</linearGradient>
+
+	<linearGradient id="mossGradient2" x1="0%" y1="100%" x2="100%" y2="0%">
+	  <stop offset="0%" style="stop-color:#5a7d5a;stop-opacity:0.4" />
+	  <stop offset="100%" style="stop-color:#6b8e6b;stop-opacity:0.2" />
+	</linearGradient>
+
+	<linearGradient id="mossGradient3" x1="50%" y1="0%" x2="50%" y2="100%">
+	  <stop offset="0%" style="stop-color:#7a9e7a;stop-opacity:0.3" />
+	  <stop offset="100%" style="stop-color:#4a6d4a;stop-opacity:0.4" />
+	</linearGradient>
+  </defs>
+
+  <rect width="64" height="64" fill="url(#bricks)"/>
+</svg>

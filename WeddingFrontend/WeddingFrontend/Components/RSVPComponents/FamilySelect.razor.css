@@ -11,17 +11,17 @@
     font-size: 3rem;
     font-weight: 600;
     letter-spacing: 0.2em;
-    color: #7a5c3a;
+    color: #d4af37;
     margin-bottom: 8px;
     text-align: center;
+    text-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
 }
 
 .rsvp-subtitle {
     font-family: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
     font-size: 1.1rem;
     letter-spacing: 0.08em;
-    color: #a08060;
-    color: #a08060;
+    color: #a89a7d;
     text-align: center;
 }
 
@@ -36,7 +36,7 @@
     right: 18px;
     top: 50%;
     transform: translateY(-50%);
-    color: #7a5c3a;
+    color: #d4af37;
     font-size: 1rem;
     pointer-events: none;
 }
@@ -49,25 +49,26 @@
     font-family: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
     font-size: 1.05rem;
     letter-spacing: 0.08em;
-    color: #7a5c3a;
-    background: rgba(255, 252, 248, 0.92);
-    border: 1px solid rgba(180, 155, 120, 0.4);
+    color: #d4af37;
+    background: rgba(45, 55, 50, 0.7);
+    border: 3px solid;
+    border-image: url('/images/cobblestone.svg') 6 repeat;
     border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(100, 70, 40, 0.08);
+    box-shadow: 0 2px 12px rgba(30, 50, 40, 0.2);
     cursor: pointer;
     outline: none;
     transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .household-select:focus {
-    border-color: rgba(180, 140, 90, 0.7);
-    box-shadow: 0 2px 16px rgba(100, 70, 40, 0.14);
+    border-image-source: url('/images/cobblestone.svg');
+    box-shadow: 0 2px 16px rgba(30, 50, 40, 0.3);
 }
 
 .household-select option {
     font-family: 'Cormorant Garamond', Georgia, serif;
-    color: #7a5c3a;
-    background: #fffcf8;
+    color: #0f1f15;
+    background: #d4af37;
 }
 
 .selected-label {
@@ -75,12 +76,12 @@
     font-family: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
     font-size: 1.15rem;
     letter-spacing: 0.08em;
-    color: #a08060;
+    color: #a89a7d;
     text-align: center;
 }
 
 .selected-name {
-    color: #7a5c3a;
+    color: #d4af37;
     font-weight: 600;
 }
 
@@ -109,11 +110,11 @@
     font-family: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
     font-size: 1.05rem;
     letter-spacing: 0.08em;
-    color: #7a5c3a;
-    background: rgba(255, 252, 248, 0.92);
-    border: 1px solid rgba(180, 155, 120, 0.4);
+    color: #d4af37;
+    background: rgba(45, 55, 50, 0.7);
+    border: 1px solid rgba(212, 175, 55, 0.25);
     border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(100, 70, 40, 0.08);
+    box-shadow: 0 2px 12px rgba(30, 50, 40, 0.2);
     transition: border-color 0.2s, box-shadow 0.2s;
 }
 
@@ -121,8 +122,8 @@
     content: '';
     width: 8px;
     height: 8px;
-    border-right: 1.5px solid #7a5c3a;
-    border-bottom: 1.5px solid #7a5c3a;
+    border-right: 1.5px solid #d4af37;
+    border-bottom: 1.5px solid #d4af37;
     transform: rotate(45deg);
     transition: transform 0.2s ease;
     flex-shrink: 0;
@@ -135,16 +136,16 @@
 }
 
 .custom-select.open .custom-select-display {
-    border-color: rgba(180, 140, 90, 0.7);
+    border-image-source: url('/images/cobblestone.svg');
     border-radius: 12px 12px 0 0;
 }
 
 .placeholder {
-    color: #b0a090;
+    color: #8a827a;
 }
 
 .custom-arrow {
-    color: #7a5c3a;
+    color: #d4af37;
     font-size: 1rem;
 }
 
@@ -156,16 +157,17 @@
     list-style: none;
     margin: 0;
     padding: 0px;
-    background: rgba(255, 252, 248, 0.98);
-    border: 1px solid rgba(180, 140, 90, 0.7);
+    background: rgba(45, 55, 50, 0.95);
+    border: 3px solid;
+    border-image: url('/images/cobblestone.svg') 6 repeat;
     border-top: none;
     border-radius: 0 0 12px 12px;
-    box-shadow: 0 8px 24px rgba(100, 70, 40, 0.12);
+    box-shadow: 0 8px 24px rgba(30, 50, 40, 0.3);
     z-index: 100;
     max-height: 30vh;
-    overflow-y: scroll; /* force clip, not just "if needed" */
-    scrollbar-width: none; /* hides scrollbar on Firefox */
-    -ms-overflow-style: none; /* hides on IE/Edge */
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
 .custom-options::-webkit-scrollbar {
@@ -177,16 +179,16 @@
     font-family: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
     font-size: 1.05rem;
     letter-spacing: 0.08em;
-    color: #7a5c3a;
+    color: #d4af37;
     cursor: pointer;
     transition: background 0.15s;
 }
 
 .custom-option:hover {
-    background: rgba(180, 140, 90, 0.1);
+    background: rgba(212, 175, 55, 0.15);
 }
 
 .custom-option.selected {
     font-weight: 600;
-    background: rgba(180, 140, 90, 0.15);
+    background: rgba(212, 175, 55, 0.25);
 }

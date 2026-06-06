@@ -27,21 +27,20 @@
     flex-direction: column;
     align-items: center;
     width: min(680px, calc(100% - 32px));
-    background: rgba(31, 47, 43, 0.85);
+    background: rgba(255, 252, 248, 0.88);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 4px solid;
-    border-image: url('/images/cobblestone.svg') 12 repeat;
+    border: 1px solid rgba(180, 155, 120, 0.25);
     border-radius: 20px;
-    box-shadow: 0 4px 24px rgba(30, 50, 40, 0.40), 0 1px 0 rgba(212, 175, 55, 0.2) inset;
+    box-shadow: 0 4px 24px rgba(100, 70, 40, 0.10), 0 1px 0 rgba(255,255,255,0.8) inset;
     padding: 14px 20px 10px;
     animation: slideDown 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
     transition: box-shadow 0.3s ease, background 0.3s ease;
 }
 
 .floating-header.scrolled {
-    box-shadow: 0 8px 32px rgba(30, 50, 40, 0.50), 0 1px 0 rgba(212, 175, 55, 0.2) inset;
-    background: rgba(31, 47, 43, 0.95);
+    box-shadow: 0 8px 32px rgba(100, 70, 40, 0.18), 0 1px 0 rgba(255,255,255,0.8) inset;
+    background: rgba(255, 252, 248, 0.97);
 }
 
 .brand {
@@ -67,7 +66,7 @@
     display: block;
     width: 100%;
     height: 1px;
-    background: rgba(212, 175, 55, 0.25);
+    background: rgba(180, 155, 120, 0.2);
     margin-bottom: 8px;
 }
 
@@ -75,7 +74,7 @@
     display: flex;
     list-style: none;
     width: 100%;
-    color: #d4af37;
+    color: #7a5c3a;
     text-decoration: none;
     justify-content: space-evenly;
     align-items: center;
@@ -182,10 +181,10 @@
         left: 0;
         right: 0;
         flex-direction: column;
-        background: rgba(31, 47, 43, 0.95);
-        border: 1px solid rgba(212, 175, 55, 0.25);
+        background: rgba(255, 252, 248, 0.98);
+        border: 1px solid rgba(180, 155, 120, 0.25);
         border-radius: 16px;
-        box-shadow: 0 8px 32px rgba(30, 50, 40, 0.30);
+        box-shadow: 0 8px 32px rgba(100, 70, 40, 0.15);
         z-index: 1001;
         justify-content: flex-start;
         width: 100%;
@@ -204,11 +203,11 @@
             padding: 5px 12px;
             font-size: 0.95rem;
             letter-spacing: 0.1em;
-            color: #d4af37;
+            color: #7a5c3a;
             text-decoration: none;
             border-radius: 999px;
             transition: background 0.2s, color 0.2s;
-            color: #d4af37; /* overrides browser default blue */
+            color: #7a5c3a; /* overrides browser default blue */
             text-decoration: none; /* removes underline */
         }
 }

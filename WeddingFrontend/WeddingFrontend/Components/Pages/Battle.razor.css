@@ -4,9 +4,11 @@
     flex-direction: column;
     gap: 20px;
     padding: 32px 24px;
-    background: #fffcf8;
+    background: rgba(45, 55, 50, 0.7);
+    border: 4px solid;
+    border-image: url('/images/cobblestone.svg') 10 repeat;
     border-radius: 16px;
-    box-shadow: 0 4px 24px rgba(100, 70, 40, 0.10);
+    box-shadow: 0 4px 24px rgba(30, 50, 40, 0.3);
     margin: 0 auto;
     width: 90%;
 }
@@ -22,7 +24,7 @@
     font-size: 1.15rem;
     font-weight: 600;
     letter-spacing: 0.10em;
-    color: #7a5c3a;
+    color: #d4af37;
     flex: 1;
 }
 
@@ -30,7 +32,7 @@
     font-size: 1.5rem;
     font-weight: 600;
     letter-spacing: 0.10em;
-    color: #7a5c3a;
+    color: #d4af37;
     flex: 1;
     margin:auto;
 }
@@ -47,7 +49,7 @@
     font-size: 1.05rem;
     font-weight: 400;
     letter-spacing: 0.08em;
-    color: #b89a72;
+    color: #c8bfa8;
     white-space: nowrap;
     flex-shrink: 0;
 }
@@ -58,9 +60,10 @@
     height: 36px;
     border-radius: 999px;
     overflow: hidden;
-    background: #ede8df;
+    background: rgba(60, 70, 65, 0.8);
     position: relative;
-    box-shadow: inset 0 2px 6px rgba(100, 70, 40, 0.12);
+    box-shadow: inset 0 2px 6px rgba(30, 50, 40, 0.3), 0 2px 8px rgba(212, 175, 55, 0.15);
+    border: 1px solid rgba(212, 175, 55, 0.15);
 }
 
 .battle-bar-left,
@@ -195,17 +198,18 @@
     font-size: 3rem;
     font-weight: 600;
     letter-spacing: 0.2em;
-    color: #7a5c3a;
+    color: #d4af37;
     text-align: center;
     margin: 0;
     padding-top: 30px;
+    text-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
 }
 
 .battle-subtitle {
     font-family: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
     font-size: 1.1rem;
     letter-spacing: 0.07em;
-    color: #a08060;
+    color: #a89a7d;
     text-align: center;
     line-height: 1.8;
     margin: 0;

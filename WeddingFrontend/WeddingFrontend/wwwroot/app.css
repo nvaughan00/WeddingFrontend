@@ -2,6 +2,13 @@ h1:focus {
     outline: none;
 }
 
+/* Mossy Cobblestone Brick Border */
+.brick-border {
+    border-image: url('/images/cobblestone.svg') 12 repeat !important;
+    border-width: 4px !important;
+    border-style: solid !important;
+}
+
 .valid.modified:not([type=checkbox]) {
     outline: 1px solid #26b050;
 }
@@ -31,31 +38,55 @@ h1:focus {
 .nav-links a,
 .nav-links a:visited,
 .nav-links a:link {
-    color: #7a5c3a !important;
+    color: #d4af37 !important;
     text-decoration: none !important;
 }
 
 .entree-option.just-selected {
-    background: rgba(180, 140, 90, 0.12) !important;
-    border-color: #7a5c3a !important;
-    box-shadow: 0 4px 20px rgba(100, 70, 40, 0.2) !important;
+    background: rgba(212, 175, 55, 0.15) !important;
+    border-color: #d4af37 !important;
+    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.2) !important;
     transform: translateY(-2px) !important;
 }
 
 .entree-option.just-selected .entree-label {
-    color: #5a3c1a !important;
+    color: #e0d89f !important;
     font-weight: 700 !important;
 }
 
 .entree-option.just-selected .entree-image-wrap {
-    border-color: rgba(122, 92, 58, 0.5) !important;
+    border-color: rgba(212, 175, 55, 0.5) !important;
 }
 
 .entree-just-selected-active {
-    background: rgba(180, 140, 90, 0.12) !important;
-    border-color: #7a5c3a !important;
-    box-shadow: 0 4px 20px rgba(100, 70, 40, 0.2) !important;
+    background: rgba(212, 175, 55, 0.15) !important;
+    border-color: #d4af37 !important;
+    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.2) !important;
     transform: translateY(-2px) !important;
+}
+
+body {
+    background: linear-gradient(135deg, #0f1f15 0%, #1a2f25 50%, #0f1f15 100%);
+    background-attachment: fixed;
+    color: #e0dcc8;
+    font-family: 'Georgia', serif;
+    position: relative;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('/images/fantasy-background.svg');
+    background-repeat: repeat;
+    background-size: 1600px 1600px;
+    background-attachment: fixed;
+    opacity: 0.3;
+    z-index: 1;
+    pointer-events: none;
 }
 
 body::before {
@@ -65,11 +96,10 @@ body::before {
     left: 0;
     right: 0;
     height: 140px;
-    background: linear-gradient( to bottom, #eef0f5 60%, transparent 100% );
+    background: linear-gradient(to bottom, rgba(31, 47, 43, 0.9) 60%, transparent 100%);
     z-index: 999;
     pointer-events: none;
 }
-
 
 @media (max-width: 600px) {
     body::before {
@@ -79,7 +109,7 @@ body::before {
         left: 0;
         right: 0;
         height: 140px;
-        background: linear-gradient( to bottom, #eef0f5 60%, transparent 100% );
+        background: linear-gradient(to bottom, rgba(31, 47, 43, 0.9) 60%, transparent 100%);
         z-index: 999;
         pointer-events: none;
     }

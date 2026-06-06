@@ -3,9 +3,10 @@
     font-size: 1.8rem;
     font-weight: 600;
     letter-spacing: 0.1em;
-    color: #7a5c3a;
+    color: #d4af37;
     text-align: center;
     margin-top: 24px;
+    text-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
 }
 
 .rsvp-container {
