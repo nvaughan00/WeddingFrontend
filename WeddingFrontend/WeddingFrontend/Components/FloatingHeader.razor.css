@@ -32,7 +32,6 @@
     -webkit-backdrop-filter: blur(16px);
     border: 4px solid;
     border-image: url('/images/cobblestone.svg') 12 repeat;
-    border-radius: 20px;
     box-shadow: 0 4px 24px rgba(30, 50, 40, 0.40), 0 1px 0 rgba(212, 175, 55, 0.2) inset;
     padding: 14px 20px 10px;
     animation: slideDown 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;

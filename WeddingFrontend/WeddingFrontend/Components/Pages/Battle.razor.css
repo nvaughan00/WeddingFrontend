@@ -171,15 +171,28 @@
 
 @media (max-width: 768px) {
     .battle-container {
-        padding: 24px 16px;
+        width: 100% !important;
+        margin: 0;
+        border-radius: 0;
+    }
+
+    .battle-page {
+        width: 100% !important;
+        max-width: 85% !important;
+        padding: 12px;
+        margin: 0;
     }
 
     .battle-btn {
         padding: 11px 16px;
         font-size: 0.95rem;
     }
-}
 
+    .battle-title {
+        font-size: 2rem;
+        padding-top: 20px;
+    }
+}
 
 .battle-page {
     padding-bottom: 80px;
