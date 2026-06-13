@@ -35,47 +35,73 @@
 	<!-- Fairy flight path animations -->
 	<style>
 	  @keyframes fairyFlight1 {
-		0% { transform: translate(0, 0); }
-		25% { transform: translate(120px, -80px); }
-		50% { transform: translate(200px, 0); }
-		75% { transform: translate(120px, 80px); }
-		100% { transform: translate(0, 0); }
+		0% { transform: translate(0, 0) rotate(0deg); }
+		10% { transform: translate(40px, -30px) rotate(2deg); }
+		25% { transform: translate(100px, -70px) rotate(4deg); }
+		40% { transform: translate(160px, -40px) rotate(2deg); }
+		50% { transform: translate(200px, 0) rotate(0deg); }
+		60% { transform: translate(180px, 40px) rotate(-2deg); }
+		75% { transform: translate(120px, 80px) rotate(-4deg); }
+		88% { transform: translate(50px, 40px) rotate(-2deg); }
+		100% { transform: translate(0, 0) rotate(0deg); }
 	  }
 	  @keyframes fairyFlight2 {
-		0% { transform: translate(0, 0); }
-		25% { transform: translate(-100px, -120px); }
-		50% { transform: translate(-180px, 0); }
-		75% { transform: translate(-100px, 120px); }
-		100% { transform: translate(0, 0); }
+		0% { transform: translate(0, 0) rotate(0deg); }
+		12% { transform: translate(-35px, -50px) rotate(-2deg); }
+		25% { transform: translate(-80px, -110px) rotate(-4deg); }
+		38% { transform: translate(-140px, -70px) rotate(-2deg); }
+		50% { transform: translate(-180px, 0) rotate(0deg); }
+		62% { transform: translate(-155px, 60px) rotate(2deg); }
+		75% { transform: translate(-100px, 120px) rotate(4deg); }
+		87% { transform: translate(-40px, 65px) rotate(2deg); }
+		100% { transform: translate(0, 0) rotate(0deg); }
 	  }
 	  @keyframes fairyFlight3 {
-		0% { transform: translate(0, 0); }
-		25% { transform: translate(80px, 100px); }
-		50% { transform: translate(150px, -80px); }
-		75% { transform: translate(60px, -150px); }
-		100% { transform: translate(0, 0); }
+		0% { transform: translate(0, 0) rotate(0deg); }
+		12% { transform: translate(30px, 40px) rotate(2deg); }
+		25% { transform: translate(80px, 100px) rotate(3deg); }
+		37% { transform: translate(120px, 40px) rotate(1deg); }
+		50% { transform: translate(150px, -80px) rotate(-2deg); }
+		62% { transform: translate(110px, -130px) rotate(-3deg); }
+		75% { transform: translate(60px, -150px) rotate(-2deg); }
+		87% { transform: translate(20px, -80px) rotate(-1deg); }
+		100% { transform: translate(0, 0) rotate(0deg); }
 	  }
 	  @keyframes fairyFlight4 {
-		0% { transform: translate(0, 0); }
-		25% { transform: translate(-120px, 90px); }
-		50% { transform: translate(-150px, -100px); }
-		75% { transform: translate(100px, -120px); }
-		100% { transform: translate(0, 0); }
+		0% { transform: translate(0, 0) rotate(0deg); }
+		12% { transform: translate(-50px, 35px) rotate(-2deg); }
+		25% { transform: translate(-120px, 90px) rotate(-3deg); }
+		37% { transform: translate(-150px, 10px) rotate(-1deg); }
+		50% { transform: translate(-150px, -100px) rotate(2deg); }
+		62% { transform: translate(-50px, -130px) rotate(3deg); }
+		75% { transform: translate(100px, -120px) rotate(2deg); }
+		87% { transform: translate(70px, -50px) rotate(1deg); }
+		100% { transform: translate(0, 0) rotate(0deg); }
 	  }
 	  @keyframes wingFlap {
-		0%, 100% { opacity: 0.35; }
-		50% { opacity: 0.15; }
+		0% { opacity: 0.35; transform: scaleY(1); }
+		25% { opacity: 0.25; transform: scaleY(0.85); }
+		50% { opacity: 0.15; transform: scaleY(0.7); }
+		75% { opacity: 0.25; transform: scaleY(0.85); }
+		100% { opacity: 0.35; transform: scaleY(1); }
 	  }
 	  @keyframes glowPulse {
-		0%, 100% { opacity: 0.7; }
-		50% { opacity: 1; }
+		0% { opacity: 0.7; transform: scale(1); }
+		25% { opacity: 0.85; transform: scale(1.03); }
+		50% { opacity: 1; transform: scale(1.06); }
+		75% { opacity: 0.85; transform: scale(1.03); }
+		100% { opacity: 0.7; transform: scale(1); }
 	  }
-	  .fairy1 { animation: fairyFlight1 6s ease-in-out infinite; }
-	  .fairy2 { animation: fairyFlight2 7s ease-in-out infinite; }
-	  .fairy3 { animation: fairyFlight3 8s ease-in-out infinite; }
-	  .fairy4 { animation: fairyFlight4 9s ease-in-out infinite; }
-	  .wings { animation: wingFlap 0.3s ease-in-out infinite; }
-	  .glow { animation: glowPulse 2s ease-in-out infinite; }
+	  .fairy1, .fairy2, .fairy3, .fairy4, .wings, .glow {
+		transform-box: fill-box;
+		transform-origin: center;
+	  }
+	  .fairy1 { animation: fairyFlight1 8s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite; }
+	  .fairy2 { animation: fairyFlight2 9s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite; }
+	  .fairy3 { animation: fairyFlight3 10s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite; }
+	  .fairy4 { animation: fairyFlight4 11s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite; }
+	  .wings { animation: wingFlap 0.4s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite; }
+	  .glow { animation: glowPulse 2.5s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite; }
 	</style>
   </defs>
 
