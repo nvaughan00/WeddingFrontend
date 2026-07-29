@@ -15,7 +15,19 @@
                 @if (item.IsOpen)
                 {
                     <div class="faq-answer">
-                        <p>@item.Answer</p>
+                        @if (item.Images != null && item.Images.Count > 0)
+                        {
+                            <div class="faq-images">
+                                @foreach (var image in item.Images)
+                                {
+                                    <img src="@image" alt="FAQ content" class="faq-image" />
+                                }
+                            </div>
+                        }
+                        @if (!string.IsNullOrWhiteSpace(item.Answer))
+                        {
+                            <p>@item.Answer</p>
+                        }
                     </div>
                 }
             </div>
@@ -26,15 +38,15 @@
 @code {
     private List<FaqItem> Faqs = new()
     {
-        new FaqItem("Is There A Theme?", "img1 img2 img3"),
-        new FaqItem("What's The Dress Code?", "Whatever makes you feel fancy. Please don't wear white."),
-        new FaqItem("Is This An \"Unplugged\" Ceremony?","Nay. Feel free to take all the pictures. Delete bad ones & send the good ones to the bride at your earliest convenience."),
-        new FaqItem("Can I Bring A +1?","This Is A Smaller Ceremony. Only those noted on the invitation are invited."),
-        new FaqItem("What Time Should I Arrive?","Between 3:40PM - 4:00PM. Early birds will have to wait. Late comers can sneak in, but we'll all know."),
-        new FaqItem("Is This Going To Be Weird?","We hope so."),
-        new FaqItem("What If I Become Part Of The Wedding?","This has already begun."),
-        new FaqItem("Is There Going To Be Dancing?","No, but if you want to continue the party after dinner -- we've got a plan."),
-        new FaqItem("What's The Food & Drink Situation?","A sumptuous selection of delicacies and refreshments shall be provided to gratify all palates. The libations shall flow forth most generously from our treasury, notwithstanding the inevitable constraints which accompany such magnanimous generosity."),
+        new FaqItem("Is There A Theme?", string.Empty, new List<string> { "/images/faq1.png", "/images/faq2.png", "/images/faq3.png" }),
+        new FaqItem("What's The Dress Code?", "Whatever makes you feel fancy. Please don't wear white.", null),
+        new FaqItem("Is This An \"Unplugged\" Ceremony?","Nay. Feel free to take all the pictures. Delete bad ones & send the good ones to the bride at your earliest convenience.", null),
+        new FaqItem("Can I Bring A +1?","This Is A Smaller Ceremony. Only those noted on the invitation are invited.", null),
+        new FaqItem("What Time Should I Arrive?","Between 3:40PM - 4:00PM. Early birds will have to wait. Late comers can sneak in, but we'll all know.", null),
+        new FaqItem("Is This Going To Be Weird?","We hope so.", null),
+        new FaqItem("What If I Become Part Of The Wedding?","This has already begun.", null),
+        new FaqItem("Is There Going To Be Dancing?","Nothing official, but if you want to continue the party after dinner -- we're planning on going out.", null),
+        new FaqItem("What's The Food & Drink Situation?","A sumptuous selection of delicacies and refreshments shall be provided to gratify all palates. The libations shall flow forth most generously from our treasury, notwithstanding the inevitable constraints which accompany such magnanimous generosity.", null),
     };
 
     private void Toggle(FaqItem item) => item.IsOpen = !item.IsOpen;
@@ -43,12 +55,14 @@
     {
         public string Question { get; set; }
         public string Answer { get; set; }
+        public List<string> Images { get; set; }
         public bool IsOpen { get; set; } = false;
 
-        public FaqItem(string question, string answer)
+        public FaqItem(string question, string answer, List<string> images = null)
         {
             Question = question;
             Answer = answer;
+            Images = images ?? new List<string>();
         }
     }
 }

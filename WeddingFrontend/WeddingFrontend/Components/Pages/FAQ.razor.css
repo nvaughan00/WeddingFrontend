@@ -96,6 +96,24 @@
         margin: 0;
     }
 
+.faq-images {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+    flex-wrap: nowrap;
+}
+
+.faq-image {
+    max-height: 200px;
+    width: auto;
+    flex: 1;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
 @media (max-width: 600px) {
     .faq-title {
         font-size: 2.2rem;
@@ -107,5 +125,13 @@
 
     .faq-question {
         font-size: 1rem;
+    }
+
+    .faq-images {
+        gap: 8px;
+    }
+
+    .faq-image {
+        max-height: 150px;
     }
 }

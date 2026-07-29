@@ -642,7 +642,15 @@ window.initExplosion = function () {
         // Fanfare trumpet (audio file)
         function fanfareTrumpets(delay) {
             setTimeout(() => {
-                const fanfare = new Audio('sounds/buddy1.mp3');
+                const fanfare = new Audio('sounds/sword.mp3');
+                fanfare.volume = 0.2;
+                fanfare.play();
+                window._hellYeahFanfare = fanfare;
+            }, delay);
+        }
+        function quest(delay) {
+            setTimeout(() => {
+                const fanfare = new Audio('sounds/questcomplete.mp3');
                 fanfare.volume = 0.2;
                 fanfare.play();
                 window._hellYeahFanfare = fanfare;
@@ -650,9 +658,8 @@ window.initExplosion = function () {
         }
 
         // Timing: clash at 1200ms, trumpet fanfare after, crowd swells in
-        swordClang(1200);
         fanfareTrumpets(1500);
-        medievalCheer(2000);
+        quest(2000);
 
     } catch (e) { console.error('Audio error:', e); }
 };
