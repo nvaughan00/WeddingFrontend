@@ -301,7 +301,7 @@ window.initExplosion = function () {
         ctx.clearRect(0, 0, W(), H());
 
         const cx = W() / 2;
-        const cy = H() * 0.3;
+        const cy = H() * 0.6;
         const swordLen = Math.min(W(), H()) * 0.45;
 
         // The blades meet a bit before the hilt (tips stop ~20% of blade short of center)
@@ -658,8 +658,8 @@ window.initExplosion = function () {
         }
 
         // Timing: clash at 1200ms, trumpet fanfare after, crowd swells in
-        fanfareTrumpets(1500);
-        quest(2000);
+        fanfareTrumpets(500);
+        quest(1000);
 
     } catch (e) { console.error('Audio error:', e); }
 };
