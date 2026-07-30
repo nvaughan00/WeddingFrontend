@@ -2,6 +2,7 @@
 @using WeddingFrontend.Services
 
 @inject GlimboService GlimboService
+@inject IJSRuntime JS
 
 <div class="wp-page">
     <h1 class="wp-title">Wedding Party</h1>
@@ -72,6 +73,11 @@
         if (person.Name == "Glimbo")
         {
             GlimboService.Trigger(true);
+        }
+
+        if (person.Name == "Meepo")
+        {
+            await JS.InvokeVoidAsync("startCatRave", person.ImagePath);
         }
     }
 

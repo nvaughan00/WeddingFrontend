@@ -13,11 +13,6 @@ window.initExplosion = function () {
     const H = () => canvas.height;
     const sparks = [];
 
-    const audio = new Audio('sounds/buddy.mp3');
-    audio.volume = 0.8;
-    audio.play();
-    window._hellYeahAudio = audio;
-
     let animFrame = null;
     let clashProgress = 0;
     let clashPhase = 'swing'; // 'swing', 'impact', 'hold'

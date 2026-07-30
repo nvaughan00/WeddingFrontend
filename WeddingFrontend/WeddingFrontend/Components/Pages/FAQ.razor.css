@@ -133,5 +133,6 @@
 
     .faq-image {
         max-height: 150px;
+        width: 33%;
     }
 }

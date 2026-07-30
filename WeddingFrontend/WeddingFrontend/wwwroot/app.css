@@ -114,3 +114,12 @@ body::before {
         pointer-events: none;
     }
 }
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
