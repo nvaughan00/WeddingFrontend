@@ -90,6 +90,8 @@ namespace WeddingFrontend.Migrations
                     { "Matt Ring", false,  "",    "Ring Family", false, "" },
                     { "Jenny Ring", false,  "",    "Ring Family", false, "" },
                     { "Rachel Ring", false,  "",    "Ring Family", false, "" },
+                    { "Alexa Ring", false,  "",    "Gunderson Family", false, "" },
+                    { "Noah Gunderson", false,  "",    "Gunderson Family", false, "" },
                     { "Olivia Trafton", false,  "",    "Trafton Family", false, "" },
                     { "Christopher Trafton", false,  "",    "Trafton Family", false, "" },
                     { "Sarah Busse", false,  "",    "Busse Family", false, "" },

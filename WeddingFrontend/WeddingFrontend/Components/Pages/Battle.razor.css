@@ -227,3 +227,41 @@
     line-height: 1.8;
     margin: 0;
 }
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    overflow: hidden;
+}
+
+.desktop-image {
+    width: 600px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    display: none;
+}
+
+.mobile-image {
+    width: calc(100% - 16px);
+    max-width: 400px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+
+@media (min-width: 768px) {
+    .desktop-image {
+        display: block !important;
+    }
+
+    .mobile-image {
+        display: none !important;
+    }
+}
+}
