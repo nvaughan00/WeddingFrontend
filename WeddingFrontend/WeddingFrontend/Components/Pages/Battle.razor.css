@@ -239,7 +239,7 @@
 
 .desktop-image {
     width: 600px;
-    height: 400px;
+    height: 600px;
     object-fit: cover;
     border-radius: 8px;
     margin-bottom: 12px;
