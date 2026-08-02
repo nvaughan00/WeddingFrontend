@@ -140,7 +140,7 @@ window.startCatRave = function (imagePath) {
 
     // ---------------- Neon flicker text ----------------
     const neonText = document.createElement('div');
-    neonText.textContent = 'MEEPO RAVE \uD83D\uDC3E';
+    neonText.textContent = 'MEEPO RAVE';
     neonText.style.cssText = `
         position: absolute;
         top: 8%; left: 50%;
